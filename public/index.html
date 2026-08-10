@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="sq">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Aurora Lumina — Gazeta digjitale elegante e Aurora Sallahu. Lajme, analiza dhe reportazhe me stil.">
+  <title>Aurora Lumina | Gazeta Digjitale</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <!-- Breaking News Ticker -->
+  <div class="ticker-bar">
+    <span class="ticker-label" id="tickerLabel">Lajme të Fundit</span>
+    <div class="ticker-wrap">
+      <div class="ticker-content" id="tickerContent">
+        <!-- Populated by API -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Header -->
+  <header class="header">
+    <div class="container header-inner">
+      <a href="#" class="logo">
+        <span class="logo-icon">✦</span>
+        <div class="logo-text">
+          <span class="logo-name">Aurora Lumina</span>
+          <span class="logo-tagline" id="logoTagline">Gazeta e Aurora Sallahu</span>
+        </div>
+      </a>
+
+      <nav class="nav" id="mainNav">
+        <a href="#" class="nav-link active" data-i18n="nav.home">Kryefaqja</a>
+        <a href="#live" class="nav-link" data-i18n="nav.live">Live</a>
+        <a href="#lajme" class="nav-link" data-i18n="nav.news">Lajme</a>
+        <a href="#lajme" class="nav-link" data-i18n="nav.politics">Politikë</a>
+        <a href="#lajme" class="nav-link" data-i18n="nav.economy">Ekonomi</a>
+        <a href="#lajme" class="nav-link" data-i18n="nav.culture">Kulturë</a>
+        <a href="#lajme" class="nav-link" data-i18n="nav.sport">Sport</a>
+        <a href="#opinion" class="nav-link" data-i18n="nav.opinion">Opinion</a>
+      </nav>
+
+      <div class="header-actions">
+        <div class="lang-switch" id="langSwitch">
+          <button class="lang-btn active" data-lang="sq" aria-label="Shqip">SQ</button>
+          <button class="lang-btn" data-lang="en" aria-label="English">EN</button>
+        </div>
+        <button class="search-btn" id="searchBtn" aria-label="Kërko">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
+          </svg>
+        </button>
+        <button class="menu-toggle" id="menuToggle" aria-label="Meny">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Lajmet Kryesore + Lajmet e Fundit (Gazeta Express style) -->
+  <section class="top-news-section" id="kryesore">
+    <div class="container">
+      <div class="top-news-header">
+        <h2 class="section-label" id="mainNewsTitle">Lajmet Kryesore</h2>
+        <a href="#lajme" class="see-all-link" id="seeAllNews">Shiko të gjitha →</a>
+      </div>
+
+      <div class="top-news-grid">
+        <article class="top-main" id="heroMain">
+          <div class="top-main-image">
+            <img id="heroImage" src="" alt="Lajme kryesore">
+            <span class="category-badge" id="heroCategory">...</span>
+          </div>
+          <div class="top-main-body">
+            <div class="top-meta">
+              <time id="heroDate" datetime="">...</time>
+              <span class="top-time" id="heroTime"></span>
+            </div>
+            <h1 id="heroTitle">Duke ngarkuar...</h1>
+            <p id="heroExcerpt"></p>
+            <div class="article-meta">
+              <span class="author" id="heroAuthor"></span>
+              <span class="read-time" id="heroReadTime"></span>
+            </div>
+          </div>
+        </article>
+
+        <div class="top-secondary" id="topStoriesGrid"></div>
+
+        <aside class="latest-sidebar">
+          <h3 class="latest-title" id="latestNewsTitle">Lajmet e Fundit</h3>
+          <ul class="latest-list" id="latestNewsList"></ul>
+        </aside>
+      </div>
+
+      <div class="top-news-row" id="topNewsRow"></div>
+    </div>
+  </section>
+
+  <!-- Live Broadcast -->
+  <section class="live-section" id="live">
+    <div class="container">
+      <div class="live-header">
+        <div class="live-header-text">
+          <span class="live-badge" id="liveBadge">
+            <span class="live-dot"></span>
+            <span id="liveBadgeText">LIVE</span>
+          </span>
+          <h2 id="liveTitle">Aurora Lumina Live</h2>
+          <p id="liveSub">Transmetim i drejtpërdrejtë — lajme, analiza dhe intervista</p>
+        </div>
+        <div class="live-viewers" id="liveViewers">
+          <span class="viewers-count">—</span>
+          <span class="viewers-label">shikues</span>
+        </div>
+      </div>
+
+      <div class="live-grid">
+        <div class="live-player-wrap">
+          <div class="live-player" id="livePlayer">
+            <div class="live-placeholder" id="livePlaceholder">
+              <img id="livePoster" src="" alt="Live">
+              <div class="live-overlay">
+                <button class="live-play-btn" id="livePlayBtn" aria-label="Shiko Live">
+                  <svg width="32" height="32" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+                </button>
+                <p id="liveOfflineText">Transmetimi fillon së shpejti</p>
+              </div>
+            </div>
+            <iframe id="liveIframe" class="live-iframe hidden" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+          </div>
+          <p class="live-now-label" id="liveNowLabel">Tani në transmetim</p>
+          <h3 class="live-show-title" id="liveShowTitle">—</h3>
+        </div>
+
+        <aside class="live-schedule">
+          <h3 id="liveScheduleTitle">Programi i ardhshëm</h3>
+          <ul class="schedule-list" id="scheduleList"></ul>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <!-- Editor's Pick -->
+  <section class="editors-pick">
+    <div class="container">
+      <div class="section-header">
+        <h2><span class="accent">✦</span> <span id="editorsPickTitle">Zgjedhja e Redaksisë</span></h2>
+        <p id="editorsPickSub">Artikuj të përzgjedhur me kujdes nga Aurora Sallahu</p>
+      </div>
+      <div class="pick-grid" id="pickGrid">
+        <!-- Populated by API -->
+      </div>
+    </div>
+  </section>
+
+  <!-- Main News Grid -->
+  <section class="news-section" id="lajme">
+    <div class="container">
+      <div class="section-header">
+        <h2 id="newsTitle">Lajmet e Ditës</h2>
+        <div class="filter-tabs">
+          <button class="tab active" data-filter="all" data-i18n="filterAll">Të Gjitha</button>
+          <button class="tab" data-filter="politike" data-i18n="nav.politics">Politikë</button>
+          <button class="tab" data-filter="ekonomi" data-i18n="nav.economy">Ekonomi</button>
+          <button class="tab" data-filter="kulture" data-i18n="nav.culture">Kulturë</button>
+          <button class="tab" data-filter="sport" data-i18n="nav.sport">Sport</button>
+        </div>
+      </div>
+
+      <div class="news-grid" id="newsGrid">
+        <!-- Populated by JS -->
+      </div>
+
+      <div class="load-more-wrap">
+        <button class="btn-outline" id="loadMore">Shfaq më shumë lajme</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Opinion Section -->
+  <section class="opinion-section" id="opinion">
+    <div class="container">
+      <div class="section-header light">
+        <h2 id="opinionTitle">Opinion & Kolumne</h2>
+        <p id="opinionSub">Zëra të lirë, ide të guximshme</p>
+      </div>
+      <div class="opinion-grid" id="opinionGrid">
+        <!-- Populated by API -->
+      </div>
+    </div>
+  </section>
+
+  <!-- Newsletter -->
+  <section class="newsletter">
+    <div class="container newsletter-inner">
+      <div class="newsletter-text">
+        <h2 id="newsletterTitle">Burimi i Ditës</h2>
+        <p id="newsletterSub">Merr çdo mëngjes përmbledhjen elegante të lajmeve — kurated by Aurora Lumina.</p>
+      </div>
+      <form class="newsletter-form" id="newsletterForm">
+        <input type="email" id="emailInput" placeholder="Email adresa juaj" required>
+        <button type="submit" class="btn-primary" id="subscribeBtn">Abonohu</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="#" class="logo">
+            <span class="logo-icon">✦</span>
+            <div class="logo-text">
+              <span class="logo-name">Aurora Lumina</span>
+              <span class="logo-tagline" id="footerTagline">Gazeta e Aurora Sallahu</span>
+            </div>
+          </a>
+          <p class="footer-desc" id="footerDesc">Gazeta digjitale që sjell lajme me elegancë, thellësi dhe integritet — duke ndriçuar çdo ditë me informacion të besueshëm.</p>
+          <div class="social-links">
+            <a href="#" aria-label="Facebook">f</a>
+            <a href="#" aria-label="Instagram">ig</a>
+            <a href="#" aria-label="Twitter">𝕏</a>
+            <a href="#" aria-label="YouTube">▶</a>
+          </div>
+        </div>
+        <div class="footer-links">
+          <h4 id="footerSections">Seksionet</h4>
+          <a href="#lajme" data-i18n="nav.news">Lajme</a>
+          <a href="#lajme" data-i18n="nav.politics">Politikë</a>
+          <a href="#lajme" data-i18n="nav.economy">Ekonomi</a>
+          <a href="#lajme" data-i18n="nav.culture">Kulturë</a>
+          <a href="#lajme" data-i18n="nav.sport">Sport</a>
+        </div>
+        <div class="footer-links">
+          <h4 id="footerAbout">Rreth Nesh</h4>
+          <a href="#" id="footerHistory">Historia</a>
+          <a href="#" id="footerEditorial">Redaksia</a>
+          <a href="#" id="footerCareers">Karriera</a>
+          <a href="#" id="footerContact">Kontakt</a>
+        </div>
+        <div class="footer-links">
+          <h4 id="footerLegal">Ligjore</h4>
+          <a href="#" id="footerPrivacy">Privatësia</a>
+          <a href="#" id="footerTerms">Kushtet</a>
+          <a href="#" id="footerCookies">Cookies</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p id="footerRights">© 2026 Aurora Lumina — Gazeta e Aurora Sallahu. Të gjitha të drejtat e rezervuara.</p>
+        <p class="footer-motto" id="footerMotto">"Si aurora, ndriçojmë çdo agim."</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

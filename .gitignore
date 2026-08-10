@@ -1,0 +1,5 @@
+node_modules/
+data/subscribers.json
+
+# generated on build (Netlify runs npm run build)
+# public/data/*.json

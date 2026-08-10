@@ -1,0 +1,25 @@
+{
+  "isLive": true,
+  "streamUrl": "https://www.youtube.com/embed/21X5lGlDOfg?autoplay=0&mute=1",
+  "poster": "https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=1200&q=80",
+  "viewers": 1847,
+  "currentShow": "Lajmet e Mbrëmjes me Aurora Sallahu",
+  "schedule": [
+    {
+      "time": "08:00",
+      "title": "Agimi — Lajmet e Mëngjesit"
+    },
+    {
+      "time": "14:00",
+      "title": "Fokus Ekonomik"
+    },
+    {
+      "time": "20:00",
+      "title": "Lajmet e Mbrëmjes"
+    },
+    {
+      "time": "22:30",
+      "title": "Opinion Live"
+    }
+  ]
+}

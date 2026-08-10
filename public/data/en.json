@@ -1,0 +1,303 @@
+{
+  "ui": {
+    "tickerLabel": "Breaking News",
+    "logoTagline": "Aurora Sallahu's Newspaper",
+    "nav": {
+      "home": "Home",
+      "news": "News",
+      "politics": "Politics",
+      "economy": "Economy",
+      "culture": "Culture",
+      "sport": "Sport",
+      "opinion": "Opinion",
+      "live": "Live"
+    },
+    "heroLoading": "Loading...",
+    "heroAlt": "Top story",
+    "authorPrefix": "By",
+    "focusTitle": "In Focus",
+    "mainNewsTitle": "Top Stories",
+    "latestNewsTitle": "Latest News",
+    "seeAllNews": "See all →",
+    "editorsPickTitle": "Editor's Pick",
+    "editorsPickSub": "Handpicked articles by Aurora Sallahu",
+    "readArticle": "Read article →",
+    "readMore": "Read →",
+    "newsTitle": "Today's News",
+    "filterAll": "All",
+    "loadMore": "Show more news",
+    "opinionTitle": "Opinion & Columns",
+    "opinionSub": "Free voices, bold ideas",
+    "newsletterTitle": "Daily Brief",
+    "newsletterSub": "Get an elegant morning roundup of the news — curated by Aurora Lumina.",
+    "emailPlaceholder": "Your email address",
+    "subscribe": "Subscribe",
+    "footerDesc": "A digital newspaper delivering news with elegance, depth and integrity — illuminating every day with trusted information.",
+    "footerSections": "Sections",
+    "footerAbout": "About Us",
+    "footerLegal": "Legal",
+    "footerHistory": "History",
+    "footerEditorial": "Editorial",
+    "footerCareers": "Careers",
+    "footerContact": "Contact",
+    "footerPrivacy": "Privacy",
+    "footerTerms": "Terms",
+    "footerCookies": "Cookies",
+    "footerRights": "© 2026 Aurora Lumina — Aurora Sallahu's Newspaper. All rights reserved.",
+    "footerMotto": "\"Like the aurora, we illuminate every dawn.\"",
+    "searchAria": "Search",
+    "menuAria": "Menu",
+    "liveBadge": "LIVE",
+    "liveTitle": "Aurora Lumina Live",
+    "liveSub": "Live broadcast — news, analysis and interviews",
+    "liveWatch": "Watch Live",
+    "liveViewers": "viewers",
+    "liveNow": "Now broadcasting",
+    "liveUpcoming": "Upcoming schedule",
+    "liveOffline": "Broadcast starting soon",
+    "liveOfflineSub": "Stay with us — live program starts at 8:00 PM",
+    "toastSubscribeOk": "Thank you! You will receive the Daily Brief every morning.",
+    "toastSubscribeErr": "Subscription error.",
+    "toastServerErr": "Could not connect to server. Please try again.",
+    "toastLoadErr": "Error loading news."
+  },
+  "ticker": [
+    "Chief Prosecutor Isufaj in northern Kosovo: identification process may take time",
+    "KDI calls on Kurti to propose candidate for Assembly Speaker",
+    "Kosovo becomes IDA donor to the World Bank",
+    "Kosovo national team beats Iceland 3-1 and advances to League B"
+  ],
+  "featured": {
+    "id": "hero-1",
+    "category": "politike",
+    "catLabel": "Kosovo",
+    "title": "Chief Prosecutor Isufaj in Zubin Potok: Identification process may take time",
+    "excerpt": "Chief Prosecutor Albin Isufaj visited northern Kosovo to discuss the delicate process of identifying the deceased. Authorities emphasize every step is being taken with maximum care and in cooperation with families.",
+    "image": "https://images.unsplash.com/photo-1529107386315-e1a2ed48a620?w=900&q=80",
+    "date": "August 10, 2026",
+    "dateIso": "2026-08-10",
+    "time": "17:45",
+    "author": "Aurora Sallahu",
+    "readTime": "6 min read"
+  },
+  "topStories": [
+    {
+      "id": "top-1",
+      "catLabel": "Politics",
+      "title": "KDI calls on Kurti to propose candidate for Assembly Speaker",
+      "excerpt": "The Kosovo Democratic Institute calls for continued political dialogue and an immediate nomination.",
+      "image": "https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=600&q=80",
+      "date": "August 10, 2026",
+      "time": "16:59"
+    },
+    {
+      "id": "top-2",
+      "catLabel": "Economy",
+      "title": "Minimum wage in Kosovo — VV vs opposition debate continues",
+      "excerpt": "Rrahmani: wage should have been €450. Murati calls the objection reckless.",
+      "image": "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=600&q=80",
+      "date": "August 10, 2026",
+      "time": "15:30"
+    }
+  ],
+  "focus": [
+    {
+      "id": "focus-1",
+      "catLabel": "Sport",
+      "title": "Kosovo beats Iceland 3-1 and advances to Nations League B",
+      "date": "Aug 9",
+      "time": "22:15",
+      "image": "https://images.unsplash.com/photo-1579952363873-27f3dade9f55?w=400&q=80"
+    },
+    {
+      "id": "focus-2",
+      "catLabel": "Economy",
+      "title": "Kosovo becomes IDA donor — new chapter with World Bank",
+      "date": "Aug 9",
+      "time": "14:20",
+      "image": "https://images.unsplash.com/photo-1557804506-669a67965ba0?w=400&q=80"
+    },
+    {
+      "id": "focus-3",
+      "catLabel": "Politics",
+      "title": "Abdixhiku LDK presidential candidate? VV: we haven't received any name",
+      "date": "Aug 8",
+      "time": "12:00",
+      "image": "https://images.unsplash.com/photo-1523961131990-585ea670c2ce?w=400&q=80"
+    },
+    {
+      "id": "focus-4",
+      "catLabel": "Culture",
+      "title": "Government building lit with LGBT rainbow flag colours",
+      "date": "Aug 8",
+      "time": "10:45",
+      "image": "https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?w=400&q=80"
+    }
+  ],
+  "editorsPick": [
+    {
+      "id": "pick-1",
+      "featured": true,
+      "catLabel": "Analysis",
+      "title": "VAT in Kosovo higher than many developed states — what experts say",
+      "excerpt": "An in-depth look at the tax burden and its impact on small businesses and Kosovo families.",
+      "image": "https://images.unsplash.com/photo-1497366216548-37526070297c?w=700&q=80"
+    },
+    {
+      "id": "pick-2",
+      "featured": false,
+      "catLabel": "North",
+      "title": "Northern situation — Vienna protests in support of Kosovo",
+      "image": "https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=400&q=80"
+    },
+    {
+      "id": "pick-3",
+      "featured": false,
+      "catLabel": "Opinion",
+      "title": "Who is the acting president today and on what basis?",
+      "image": "https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=400&q=80"
+    }
+  ],
+  "opinions": [
+    {
+      "id": "op-1",
+      "initials": "AS",
+      "quote": "Journalism is not just information — it is light illuminating the path to truth.",
+      "cite": "Aurora Sallahu, Founder"
+    },
+    {
+      "id": "op-2",
+      "initials": "MK",
+      "quote": "Democracy flourishes where citizens read, question and think critically.",
+      "cite": "Dr. Mira Krasniqi, Political Analyst"
+    },
+    {
+      "id": "op-3",
+      "initials": "AG",
+      "quote": "In Kosovo, VAT is higher than in developed states — smart reform is needed.",
+      "cite": "Ardian Gjini, Economist"
+    }
+  ],
+  "news": [
+    {
+      "id": 1,
+      "category": "politike",
+      "catLabel": "Kosovo",
+      "title": "Chief Prosecutor Isufaj in Zubin Potok: process may take time",
+      "excerpt": "Northern visit emphasizes need for patience in identification process and cooperation with families.",
+      "image": "https://images.unsplash.com/photo-1529107386315-e1a2ed48a620?w=600&q=80",
+      "date": "August 10, 2026",
+      "time": "17:45",
+      "author": "Aurora Sallahu",
+      "readTime": "6 min"
+    },
+    {
+      "id": 2,
+      "category": "politike",
+      "catLabel": "Politics",
+      "title": "KDI calls on Kurti to propose Assembly Speaker candidate",
+      "excerpt": "Democratic Institute calls for continued dialogue and immediate nomination.",
+      "image": "https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=600&q=80",
+      "date": "August 10, 2026",
+      "time": "16:59",
+      "author": "Arben Hoxha",
+      "readTime": "5 min"
+    },
+    {
+      "id": 3,
+      "category": "ekonomi",
+      "catLabel": "Economy",
+      "title": "VV: minimum wage should have been €450 — debate intensifies",
+      "excerpt": "Rrahmani and Murati exchange accusations in Assembly over wage policy.",
+      "image": "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=600&q=80",
+      "date": "August 10, 2026",
+      "time": "15:30",
+      "author": "Elira Leka",
+      "readTime": "4 min"
+    },
+    {
+      "id": 4,
+      "category": "sport",
+      "catLabel": "Sport",
+      "title": "Kosovo beats Iceland 3-1 — advances to League B",
+      "excerpt": "National team records historic victory and secures Nations League promotion.",
+      "image": "https://images.unsplash.com/photo-1579952363873-27f3dade9f55?w=600&q=80",
+      "date": "August 9, 2026",
+      "time": "22:15",
+      "author": "Genti Rama",
+      "readTime": "3 min"
+    },
+    {
+      "id": 5,
+      "category": "ekonomi",
+      "catLabel": "Economy",
+      "title": "Kosovo becomes World Bank IDA donor",
+      "excerpt": "Important step in the country's international economic relations.",
+      "image": "https://images.unsplash.com/photo-1557804506-669a67965ba0?w=600&q=80",
+      "date": "August 9, 2026",
+      "time": "14:20",
+      "author": "Mira Krasniqi",
+      "readTime": "5 min"
+    },
+    {
+      "id": 6,
+      "category": "politike",
+      "catLabel": "Politics",
+      "title": "Abdixhiku LDK presidential candidate?",
+      "excerpt": "VV at Pressing: we have not received any official name from opposition.",
+      "image": "https://images.unsplash.com/photo-1523961131990-585ea670c2ce?w=600&q=80",
+      "date": "August 8, 2026",
+      "time": "12:00",
+      "author": "Aurora Sallahu",
+      "readTime": "4 min"
+    },
+    {
+      "id": 7,
+      "category": "kulture",
+      "catLabel": "Culture",
+      "title": "Government building lit with LGBT rainbow flag colours",
+      "excerpt": "Symbolic act that draws mixed reactions from the public.",
+      "image": "https://images.unsplash.com/photo-1460661414781-efabcd8835c1?w=600&q=80",
+      "date": "August 8, 2026",
+      "time": "10:45",
+      "author": "Drita Shehu",
+      "readTime": "3 min"
+    },
+    {
+      "id": 8,
+      "category": "politike",
+      "catLabel": "Region",
+      "title": "Sudan officially recognizes independent Kosovo",
+      "excerpt": "Another diplomatic step for Kosovo on the international stage.",
+      "image": "https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=600&q=80",
+      "date": "August 7, 2026",
+      "time": "09:30",
+      "author": "Arben Hoxha",
+      "readTime": "4 min"
+    },
+    {
+      "id": 9,
+      "category": "sport",
+      "catLabel": "Sport",
+      "title": "18 years since Ahtisaari report on Kosovo independence",
+      "excerpt": "Remembering the historic day when the report leading to independence was submitted.",
+      "image": "https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=600&q=80",
+      "date": "August 7, 2026",
+      "time": "08:00",
+      "author": "Anila Berisha",
+      "readTime": "5 min"
+    },
+    {
+      "id": 10,
+      "category": "politike",
+      "catLabel": "North",
+      "title": "Vienna protests in support of Kosovo and northern situation",
+      "excerpt": "Hundreds gather demanding international support for Kosovo.",
+      "image": "https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=600&q=80",
+      "date": "August 6, 2026",
+      "time": "18:00",
+      "author": "Aurora Sallahu",
+      "readTime": "4 min"
+    }
+  ]
+}

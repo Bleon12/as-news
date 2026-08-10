@@ -1,0 +1,25 @@
+{
+  "isLive": true,
+  "streamUrl": "https://www.youtube.com/embed/21X5lGlDOfg?autoplay=0&mute=1",
+  "poster": "https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=1200&q=80",
+  "viewers": 1847,
+  "currentShow": "Evening News with Aurora Sallahu",
+  "schedule": [
+    {
+      "time": "08:00",
+      "title": "Dawn — Morning News"
+    },
+    {
+      "time": "14:00",
+      "title": "Economic Focus"
+    },
+    {
+      "time": "20:00",
+      "title": "Evening News"
+    },
+    {
+      "time": "22:30",
+      "title": "Opinion Live"
+    }
+  ]
+}
