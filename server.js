@@ -33,7 +33,7 @@ function langFromReq(req) {
 }
 
 app.get('/api/health', (_req, res) => {
-  res.json({ status: 'ok', name: 'Aurora Lumina API' });
+  res.json({ status: 'ok', name: 'AS NEWS API' });
 });
 
 app.get('/api/ui', (req, res) => {
@@ -148,7 +148,7 @@ app.get('*', (_req, res) => {
 });
 
 app.listen(PORT, () => {
-  console.log(`\n  ✦ Aurora Lumina`);
+  console.log(`\n  ✦ AS NEWS`);
   console.log(`  Gazeta e Aurora Sallahu`);
   console.log(`  → http://localhost:${PORT}\n`);
 });

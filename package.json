@@ -1,7 +1,7 @@
 {
-  "name": "aurora-lumina",
+  "name": "as-news",
   "version": "1.0.0",
-  "description": "Aurora Lumina — Gazeta digjitale e Aurora Sallahu",
+  "description": "AS NEWS — Gazeta digjitale e Aurora Sallahu",
   "main": "server.js",
   "engines": {
     "node": ">=18"

@@ -170,8 +170,8 @@ function applyUI() {
   });
 
   document.title = currentLang === 'en'
-    ? 'Aurora Lumina | Digital Newspaper'
-    : 'Aurora Lumina | Gazeta Digjitale';
+    ? 'AS NEWS | Digital Newspaper'
+    : 'AS NEWS | Gazeta Digjitale';
 }
 
 async function loadUI() {

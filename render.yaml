@@ -1,6 +1,6 @@
 services:
   - type: web
-    name: aurora-lumina
+    name: as-news
     runtime: node
     buildCommand: npm install && npm run build
     startCommand: npm start
