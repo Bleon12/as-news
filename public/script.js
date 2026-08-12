@@ -423,8 +423,10 @@ function initLangSwitch() {
     btn.addEventListener('click', async () => {
       if (btn.dataset.lang === currentLang) return;
       setLang(btn.dataset.lang);
+      document.querySelectorAll('.reveal').forEach((el) => el.classList.remove('revealed'));
       try {
         await reloadAll();
+        initScrollReveal();
       } catch {
         showToast(ui.toastLoadErr);
       }
@@ -508,6 +510,34 @@ function initNewsletter() {
   });
 }
 
+function initScrollReveal() {
+  const reveals = document.querySelectorAll('.reveal:not(.revealed)');
+  if (!reveals.length) return;
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('revealed');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.08, rootMargin: '0px 0px -30px 0px' });
+
+  reveals.forEach((el) => observer.observe(el));
+}
+
+function initHeaderScroll() {
+  const header = document.querySelector('.header');
+  if (!header) return;
+
+  const onScroll = () => {
+    header.classList.toggle('scrolled', window.scrollY > 24);
+  };
+
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+}
+
 function showToast(message) {
   document.querySelector('.toast')?.remove();
 
@@ -543,10 +573,12 @@ document.addEventListener('DOMContentLoaded', async () => {
   initLoadMore();
   initMobileMenu();
   initNewsletter();
+  initHeaderScroll();
   document.getElementById('livePlayBtn')?.addEventListener('click', startLiveStream);
 
   try {
     await reloadAll();
+    initScrollReveal();
   } catch (err) {
     console.error(err);
     showToast(ui.toastLoadErr || 'Error');
