@@ -372,7 +372,7 @@ function renderNews() {
   if (!grid) return;
 
   grid.innerHTML = newsData.map((item, i) => `
-    <article class="news-card fade-in" data-category="${item.category}" style="animation-delay: ${i * 0.08}s">
+    <article class="news-card fade-in" data-category="${item.category}" style="animation-delay: ${i * 0.12}s">
       <div class="news-card-image">
         <img src="${item.image}" alt="${item.title}">
       </div>
@@ -453,14 +453,174 @@ function initLoadMore() {
   });
 }
 
+const BG_SLIDES = [
+  'https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?w=1920&q=80',
+  'https://images.unsplash.com/photo-1586892478167-f19877ac8611?w=1920&q=80',
+  'https://images.unsplash.com/photo-1504711432789-3849292768d0?w=1920&q=80',
+  'https://images.unsplash.com/photo-1495020689067-958852a7765e?w=1920&q=80',
+  'https://images.unsplash.com/photo-1529107386315-e1a2ed48a620?w=1920&q=80',
+  'https://images.unsplash.com/photo-1516321497487-e488888be753?w=1920&q=80',
+  'https://images.unsplash.com/photo-1475721027785-f74eccf877e0?w=1920&q=80',
+  'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1920&q=80'
+];
+
+function initBackgroundSlideshow() {
+  const container = document.getElementById('pageBgSlideshow');
+  if (!container) return;
+
+  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  BG_SLIDES.forEach((url, i) => {
+    const slide = document.createElement('div');
+    slide.className = `bg-slide${i === 0 ? ' active' : ''}`;
+    slide.style.backgroundImage = `url('${url}')`;
+    container.appendChild(slide);
+  });
+
+  const slides = container.querySelectorAll('.bg-slide');
+  if (slides.length < 2 || reduced) return;
+
+  let current = 0;
+  const interval = window.innerWidth <= 768 ? 7000 : 5500;
+
+  setInterval(() => {
+    slides[current].classList.remove('active');
+    slides[current].classList.add('exit');
+    current = (current + 1) % slides.length;
+    slides[current].classList.add('active');
+    slides[current].classList.remove('exit');
+
+    const prev = (current - 1 + slides.length) % slides.length;
+    setTimeout(() => slides[prev].classList.remove('exit'), 2800);
+  }, interval);
+}
+
+function initParallaxBackground() {
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+  const slideshow = document.getElementById('pageBgSlideshow');
+  const mesh = document.querySelector('.page-bg-mesh');
+  if (!slideshow || window.innerWidth <= 768) return;
+
+  let ticking = false;
+  window.addEventListener('scroll', () => {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(() => {
+      const y = window.scrollY;
+      slideshow.style.transform = `translateY(${y * 0.12}px) scale(1.02)`;
+      if (mesh) mesh.style.transform = `translateY(${y * 0.06}px)`;
+      ticking = false;
+    });
+  }, { passive: true });
+}
+
+function initBackgroundVideo() {
+  const video = document.getElementById('pageBgVideo');
+  const fallback = document.querySelector('.page-bg-fallback');
+  if (!video) return;
+
+  const motionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+  const useFallback = () => {
+    video.pause();
+    video.classList.add('is-hidden');
+    if (fallback) fallback.classList.add('is-active');
+  };
+
+  if (motionQuery.matches || navigator.connection?.saveData) {
+    useFallback();
+    return;
+  }
+
+  video.addEventListener('error', useFallback);
+
+  const tryPlay = () => {
+    video.play().catch(useFallback);
+  };
+
+  if (video.readyState >= 2) tryPlay();
+  else video.addEventListener('loadeddata', tryPlay, { once: true });
+
+  document.addEventListener('visibilitychange', () => {
+    if (document.hidden) video.pause();
+    else if (!video.classList.contains('is-hidden')) tryPlay();
+  });
+
+  motionQuery.addEventListener('change', (e) => {
+    if (e.matches) useFallback();
+  });
+}
+
+function initMobileBottomNav() {
+  const nav = document.getElementById('mobileBottomNav');
+  if (!nav) return;
+
+  const items = nav.querySelectorAll('.mob-nav-item');
+  const sectionMap = [
+    { id: 'live', href: '#live' },
+    { id: 'lajme', href: '#lajme' },
+    { id: 'opinion', href: '#opinion' }
+  ];
+
+  const setActive = (href) => {
+    items.forEach((item) => {
+      const itemHref = item.getAttribute('href');
+      const isHome = itemHref === '#';
+      item.classList.toggle('active', href === itemHref || (isHome && (!href || href === '#')));
+    });
+  };
+
+  nav.querySelector('[href="#"]')?.addEventListener('click', (e) => {
+    e.preventDefault();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    setActive('#');
+  });
+
+  items.forEach((item) => {
+    if (item.getAttribute('href') === '#') return;
+    item.addEventListener('click', () => setActive(item.getAttribute('href')));
+  });
+
+  const observer = new IntersectionObserver((entries) => {
+    const visible = entries
+      .filter((e) => e.isIntersecting)
+      .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+    if (!visible) return;
+    const match = sectionMap.find((s) => s.id === visible.target.id);
+    if (match) setActive(match.href);
+  }, { threshold: [0.15, 0.35, 0.55], rootMargin: '-30% 0px -35% 0px' });
+
+  sectionMap.forEach(({ id }) => {
+    const el = document.getElementById(id);
+    if (el) observer.observe(el);
+  });
+
+  let scrollTimeout;
+  window.addEventListener('scroll', () => {
+    clearTimeout(scrollTimeout);
+    scrollTimeout = setTimeout(() => {
+      if (window.scrollY < 120) setActive('#');
+    }, 80);
+  }, { passive: true });
+}
+
 function initMobileMenu() {
   const toggle = document.getElementById('menuToggle');
   const nav = document.getElementById('mainNav');
   if (!toggle || !nav) return;
 
-  toggle.addEventListener('click', () => nav.classList.toggle('open'));
+  toggle.addEventListener('click', () => {
+    const isOpen = nav.classList.toggle('open');
+    toggle.classList.toggle('active', isOpen);
+    document.body.classList.toggle('nav-open', isOpen);
+  });
+
   nav.querySelectorAll('.nav-link').forEach((link) => {
-    link.addEventListener('click', () => nav.classList.remove('open'));
+    link.addEventListener('click', () => {
+      nav.classList.remove('open');
+      toggle.classList.remove('active');
+      document.body.classList.remove('nav-open');
+    });
   });
 }
 
@@ -518,10 +678,13 @@ function initScrollReveal() {
     entries.forEach((entry) => {
       if (entry.isIntersecting) {
         entry.target.classList.add('revealed');
+        entry.target.querySelectorAll('.news-card, .latest-item').forEach((child, i) => {
+          child.style.animationDelay = `${i * 0.07}s`;
+        });
         observer.unobserve(entry.target);
       }
     });
-  }, { threshold: 0.08, rootMargin: '0px 0px -30px 0px' });
+  }, { threshold: 0.06, rootMargin: '0px 0px -40px 0px' });
 
   reveals.forEach((el) => observer.observe(el));
 }
@@ -544,25 +707,11 @@ function showToast(message) {
   const toast = document.createElement('div');
   toast.className = 'toast';
   toast.textContent = message;
-  toast.style.cssText = `
-    position: fixed; bottom: 32px; left: 50%;
-    transform: translateX(-50%) translateY(20px);
-    background: #3d3a38; color: #faf8f5;
-    padding: 14px 28px; border-radius: 30px;
-    font-size: 0.9rem; font-family: 'Outfit', sans-serif;
-    box-shadow: 0 8px 32px rgba(0,0,0,0.15);
-    z-index: 1000; opacity: 0; transition: all 0.4s ease;
-  `;
-
   document.body.appendChild(toast);
-  requestAnimationFrame(() => {
-    toast.style.opacity = '1';
-    toast.style.transform = 'translateX(-50%) translateY(0)';
-  });
+  requestAnimationFrame(() => toast.classList.add('visible'));
 
   setTimeout(() => {
-    toast.style.opacity = '0';
-    toast.style.transform = 'translateX(-50%) translateY(20px)';
+    toast.classList.remove('visible');
     setTimeout(() => toast.remove(), 400);
   }, 3500);
 }
@@ -572,6 +721,10 @@ document.addEventListener('DOMContentLoaded', async () => {
   initFilters();
   initLoadMore();
   initMobileMenu();
+  initMobileBottomNav();
+  initBackgroundSlideshow();
+  initBackgroundVideo();
+  initParallaxBackground();
   initNewsletter();
   initHeaderScroll();
   document.getElementById('livePlayBtn')?.addEventListener('click', startLiveStream);

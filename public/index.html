@@ -2,7 +2,7 @@
 <html lang="sq">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <meta name="description" content="AS NEWS — Gazeta digjitale e Aurora Sallahu. Lajme, analiza dhe reportazhe me stil.">
   <title>AS NEWS | Gazeta Digjitale</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -11,11 +11,31 @@
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <!-- Live broadcast background -->
+  <!-- Live broadcast background (video + slideshow foto) -->
   <div class="page-bg" aria-hidden="true">
-    <div class="page-bg-image"></div>
+    <div class="page-bg-slideshow" id="pageBgSlideshow"></div>
+    <video
+      class="page-bg-video"
+      id="pageBgVideo"
+      autoplay
+      muted
+      loop
+      playsinline
+      preload="metadata"
+      poster="https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?w=1920&q=80"
+    >
+      <source src="https://videos.pexels.com/video-files/7578612/7578612-sd_640_360_30fps.mp4" type="video/mp4" media="(max-width: 768px)">
+      <source src="https://videos.pexels.com/video-files/7578612/7578612-hd_1920_1080_30fps.mp4" type="video/mp4">
+    </video>
+    <div class="page-bg-image page-bg-fallback"></div>
+    <div class="page-bg-mesh"></div>
     <div class="page-bg-overlay"></div>
-    <div class="page-bg-glow"></div>
+    <div class="page-bg-glow page-bg-glow-1"></div>
+    <div class="page-bg-glow page-bg-glow-2"></div>
+    <div class="page-bg-glow page-bg-glow-3"></div>
+    <div class="page-bg-glow page-bg-glow-4"></div>
+    <div class="page-bg-particles" aria-hidden="true"></div>
+    <div class="page-bg-grain"></div>
   </div>
 
   <div class="page-content">
@@ -69,7 +89,7 @@
   </header>
 
   <!-- Lajmet Kryesore + Lajmet e Fundit (Gazeta Express style) -->
-  <section class="top-news-section reveal" id="kryesore">
+  <section class="top-news-section reveal reveal-blur" id="kryesore">
     <div class="container">
       <div class="top-news-header">
         <h2 class="section-label" id="mainNewsTitle">Lajmet Kryesore</h2>
@@ -154,7 +174,7 @@
   </section>
 
   <!-- Editor's Pick -->
-  <section class="editors-pick reveal">
+  <section class="editors-pick reveal reveal-rotate">
     <div class="container">
       <div class="section-header">
         <h2><span class="accent">✦</span> <span id="editorsPickTitle">Zgjedhja e Redaksisë</span></h2>
@@ -167,7 +187,7 @@
   </section>
 
   <!-- Main News Grid -->
-  <section class="news-section reveal" id="lajme">
+  <section class="news-section reveal reveal-flip" id="lajme">
     <div class="container">
       <div class="section-header">
         <h2 id="newsTitle">Lajmet e Ditës</h2>
@@ -191,7 +211,7 @@
   </section>
 
   <!-- Opinion Section -->
-  <section class="opinion-section reveal" id="opinion">
+  <section class="opinion-section reveal reveal-rotate" id="opinion">
     <div class="container">
       <div class="section-header light">
         <h2 id="opinionTitle">Opinion & Kolumne</h2>
@@ -204,7 +224,7 @@
   </section>
 
   <!-- Newsletter -->
-  <section class="newsletter reveal">
+  <section class="newsletter reveal reveal-blur">
     <div class="container newsletter-inner">
       <div class="newsletter-text">
         <h2 id="newsletterTitle">Burimi i Ditës</h2>
@@ -265,6 +285,26 @@
       </div>
     </div>
   </footer>
+
+  <!-- Mobile bottom navigation -->
+  <nav class="mobile-bottom-nav" id="mobileBottomNav" aria-label="Navigim mobil">
+    <a href="#" class="mob-nav-item active" data-i18n="nav.home">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9.5 12 3l9 6.5V20a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1V9.5z"/></svg>
+      <span>Kryefaqja</span>
+    </a>
+    <a href="#live" class="mob-nav-item" data-i18n="nav.live">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7z"/></svg>
+      <span>Live</span>
+    </a>
+    <a href="#lajme" class="mob-nav-item" data-i18n="nav.news">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19h16M4 15h16M4 11h16M4 7h10"/></svg>
+      <span>Lajme</span>
+    </a>
+    <a href="#opinion" class="mob-nav-item" data-i18n="nav.opinion">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9M8 16H3a1 1 0 0 1-1-1v-4a1 1 0 0 1 1-1h5m4 0V4a1 1 0 0 1 1-1h5a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1h-5a1 1 0 0 1-1-1v-3"/></svg>
+      <span>Opinion</span>
+    </a>
+  </nav>
 
   </div><!-- .page-content -->
 
