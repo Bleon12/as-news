@@ -71,6 +71,10 @@ app.get('/api/opinions', (req, res) => {
   res.json(getLocale(langFromReq(req)).opinions);
 });
 
+app.get('/api/cv', (req, res) => {
+  res.json(getLocale(langFromReq(req)).cv);
+});
+
 app.get('/api/live', (req, res) => {
   const lang = langFromReq(req);
   res.json({

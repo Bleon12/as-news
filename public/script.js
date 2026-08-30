@@ -15,6 +15,7 @@ let liveStarted = false;
 let staticMode = null;
 let staticLocale = null;
 let staticLive = null;
+let cvData = null;
 
 function langParam() {
   return `lang=${currentLang}`;
@@ -77,6 +78,7 @@ function resolveStaticApi(url) {
   if (path.endsWith('/focus')) return d.focus;
   if (path.endsWith('/editors-pick')) return d.editorsPick;
   if (path.endsWith('/opinions')) return d.opinions;
+  if (path.endsWith('/cv')) return d.cv;
   if (path.endsWith('/live')) return staticLive;
 
   if (path.endsWith('/latest')) {
@@ -163,6 +165,7 @@ function applyUI() {
   document.getElementById('liveScheduleTitle').textContent = ui.liveUpcoming;
   document.getElementById('liveOfflineText').textContent = ui.liveOffline;
   document.getElementById('livePlayBtn').ariaLabel = ui.liveWatch;
+  document.getElementById('cvModalClose').ariaLabel = ui.cvClose;
 
   document.querySelectorAll('[data-i18n]').forEach((el) => {
     const val = getNested(ui, el.dataset.i18n);
@@ -327,6 +330,97 @@ function startLiveStream() {
   iframe.classList.remove('hidden');
 }
 
+async function loadCV() {
+  cvData = await fetchJSON(`${API}/cv`);
+}
+
+function renderCVModal() {
+  if (!cvData) return;
+  const el = document.getElementById('cvModalContent');
+  if (!el) return;
+
+  el.innerHTML = `
+    <div class="cv-modal-header">
+      <div class="cv-modal-photo">
+        <img src="${cvData.image}" alt="${cvData.name}">
+      </div>
+      <div class="cv-modal-intro">
+        <h2 id="cvModalTitle">${cvData.name}</h2>
+        <p class="cv-modal-role">${cvData.title}</p>
+        <p class="cv-modal-summary">${cvData.summary}</p>
+        <div class="cv-modal-contact">
+          <span>📍 ${cvData.location}</span>
+          <a href="mailto:${cvData.email}">✉ ${cvData.email}</a>
+        </div>
+      </div>
+    </div>
+    <div class="cv-modal-sections">
+      <section class="cv-modal-block">
+        <h3>${ui.cvEducation}</h3>
+        ${cvData.education.map((e) => `
+          <div class="cv-entry">
+            <span class="cv-period">${e.period}</span>
+            <h4>${e.title}</h4>
+            <p class="cv-place">${e.place}</p>
+            <p class="cv-desc">${e.desc}</p>
+          </div>
+        `).join('')}
+      </section>
+      <section class="cv-modal-block">
+        <h3>${ui.cvExperience}</h3>
+        ${cvData.experience.map((e) => `
+          <div class="cv-entry">
+            <span class="cv-period">${e.period}</span>
+            <h4>${e.title}</h4>
+            <p class="cv-place">${e.place}</p>
+            <p class="cv-desc">${e.desc}</p>
+          </div>
+        `).join('')}
+      </section>
+      <section class="cv-modal-block cv-modal-skills">
+        <h3>${ui.cvSkills}</h3>
+        <div class="cv-skills">
+          ${cvData.skills.map((s) => `<span class="cv-skill">${s}</span>`).join('')}
+        </div>
+      </section>
+    </div>
+  `;
+}
+
+function openCVModal() {
+  const modal = document.getElementById('cvModal');
+  if (!modal) return;
+  renderCVModal();
+  modal.classList.add('open');
+  modal.setAttribute('aria-hidden', 'false');
+  document.body.classList.add('cv-open');
+}
+
+function closeCVModal() {
+  const modal = document.getElementById('cvModal');
+  if (!modal) return;
+  modal.classList.remove('open');
+  modal.setAttribute('aria-hidden', 'true');
+  document.body.classList.remove('cv-open');
+}
+
+function initCVModal() {
+  document.getElementById('cvMenuLink')?.addEventListener('click', (e) => {
+    e.preventDefault();
+    document.getElementById('mainNav')?.classList.remove('open');
+    document.getElementById('menuToggle')?.classList.remove('active');
+    document.body.classList.remove('nav-open');
+    openCVModal();
+  });
+
+  document.getElementById('cvModalClose')?.addEventListener('click', closeCVModal);
+  document.getElementById('cvModalBackdrop')?.addEventListener('click', closeCVModal);
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeCVModal();
+  });
+}
+
 async function loadLive() {
   const data = await fetchJSON(`${API}/live`);
   const badge = document.getElementById('liveBadge');
@@ -398,6 +492,7 @@ async function reloadAll() {
   liveStarted = false;
   staticLocale = null;
   staticLive = null;
+  cvData = null;
   document.getElementById('livePlaceholder')?.classList.remove('hidden');
   document.getElementById('liveIframe')?.classList.add('hidden');
   document.getElementById('liveIframe').src = '';
@@ -412,7 +507,8 @@ async function reloadAll() {
     loadLive(),
     loadEditorsPick(),
     loadOpinions(),
-    loadNews()
+    loadNews(),
+    loadCV()
   ]);
 }
 
@@ -423,6 +519,7 @@ function initLangSwitch() {
     btn.addEventListener('click', async () => {
       if (btn.dataset.lang === currentLang) return;
       setLang(btn.dataset.lang);
+      closeCVModal();
       document.querySelectorAll('.reveal').forEach((el) => el.classList.remove('revealed'));
       try {
         await reloadAll();
@@ -615,7 +712,7 @@ function initMobileMenu() {
     document.body.classList.toggle('nav-open', isOpen);
   });
 
-  nav.querySelectorAll('.nav-link').forEach((link) => {
+  nav.querySelectorAll('.nav-link:not(.nav-link-cv)').forEach((link) => {
     link.addEventListener('click', () => {
       nav.classList.remove('open');
       toggle.classList.remove('active');
@@ -721,6 +818,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   initFilters();
   initLoadMore();
   initMobileMenu();
+  initCVModal();
   initMobileBottomNav();
   initBackgroundSlideshow();
   initBackgroundVideo();

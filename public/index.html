@@ -69,6 +69,7 @@
         <a href="#lajme" class="nav-link" data-i18n="nav.culture">Kulturë</a>
         <a href="#lajme" class="nav-link" data-i18n="nav.sport">Sport</a>
         <a href="#opinion" class="nav-link" data-i18n="nav.opinion">Opinion</a>
+        <a href="#" class="nav-link nav-link-cv nav-menu-only" id="cvMenuLink" data-i18n="nav.cv">CV — Aurora Sallahu</a>
       </nav>
 
       <div class="header-actions">
@@ -307,6 +308,15 @@
   </nav>
 
   </div><!-- .page-content -->
+
+  <!-- CV Modal (vetëm nga burger menu) -->
+  <div class="cv-modal" id="cvModal" aria-hidden="true" role="dialog" aria-labelledby="cvModalTitle">
+    <div class="cv-modal-backdrop" id="cvModalBackdrop"></div>
+    <div class="cv-modal-panel">
+      <button type="button" class="cv-modal-close" id="cvModalClose" aria-label="Mbyll">×</button>
+      <div class="cv-modal-content" id="cvModalContent"></div>
+    </div>
+  </div>
 
   <script src="script.js"></script>
 </body>

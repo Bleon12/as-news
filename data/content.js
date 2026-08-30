@@ -2,7 +2,7 @@ const sq = {
   ui: {
     tickerLabel: 'Lajme të Fundit',
     logoTagline: 'Gazeta e Aurora Sallahu',
-    nav: { home: 'Kryefaqja', news: 'Lajme', politics: 'Politikë', economy: 'Ekonomi', culture: 'Kulturë', sport: 'Sport', opinion: 'Opinion', live: 'Live' },
+    nav: { home: 'Kryefaqja', news: 'Lajme', politics: 'Politikë', economy: 'Ekonomi', culture: 'Kulturë', sport: 'Sport', opinion: 'Opinion', live: 'Live', cv: 'CV — Aurora Sallahu' },
     heroLoading: 'Duke ngarkuar...',
     heroAlt: 'Lajme kryesore',
     authorPrefix: 'Nga',
@@ -50,7 +50,65 @@ const sq = {
     toastSubscribeOk: 'Faleminderit! Do të merrni Burimin e Ditës çdo mëngjes.',
     toastSubscribeErr: 'Gabim gjatë abonimit.',
     toastServerErr: 'Nuk u lidh me serverin. Provo përsëri.',
-    toastLoadErr: 'Gabim gjatë ngarkimit të lajmeve.'
+    toastLoadErr: 'Gabim gjatë ngarkimit të lajmeve.',
+    cvClose: 'Mbyll',
+    cvEducation: 'Arsimimi',
+    cvExperience: 'Eksperienca',
+    cvSkills: 'Aftësitë',
+    cvContact: 'Kontakt'
+  },
+
+  cv: {
+    name: 'Aurora Sallahu',
+    title: 'Themeluese & Redaktore Kryesore — AS NEWS',
+    location: 'Prishtinë, Kosovë',
+    email: 'aurora.sallahu@asnews.com',
+    image: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=600&q=80',
+    summary: 'Gazetare dhe redaktore me mbi 8 vjet përvojë në media digjitale dhe televizive. Themeluese e AS NEWS — platformës që sjell lajme me integritet, stil dhe thellësi analitike për audiencën shqiptare.',
+    education: [
+      {
+        period: '2014 — 2018',
+        title: 'Bachelor — Gazetari & Komunikim Masiv',
+        place: 'Universiteti i Prishtinës, Fakulteti i Filologjisë',
+        desc: 'Diplomë me distinksion. Fokus në gazetari investigative, etikë mediatike dhe reportazh televiziv.'
+      },
+      {
+        period: '2011 — 2014',
+        title: 'Shkolla e Mesme',
+        place: 'Gjimnazi "Sami Frashëri", Prishtinë',
+        desc: 'Drejtimi shoqëror-humanistik. Aktive në gazetën e shkollës dhe debatet studentore.'
+      }
+    ],
+    experience: [
+      {
+        period: '2023 — Sot',
+        title: 'Themeluese & Redaktore Kryesore',
+        place: 'AS NEWS — Gazeta Digjitale',
+        desc: 'Udhëheq redaksionin, kuron lajmet kryesore, moderon transmetimet live dhe garanton standardin editorial të platformës.'
+      },
+      {
+        period: '2019 — 2023',
+        title: 'Gazetare & Prezantuese',
+        place: 'RTK — Radio Televizioni i Kosovës',
+        desc: 'Reportazhe nga terreni, intervista politike dhe emisione informative. Mbulim i zgjedhjeve dhe ngjarjeve kombëtare.'
+      },
+      {
+        period: '2018 — 2019',
+        title: 'Gazetare e Rinë',
+        place: 'Koha Ditore — Prishtinë',
+        desc: 'Shkrime për politikë, kulturë dhe shoqëri. Artikuj të publikuar në print dhe online.'
+      }
+    ],
+    skills: [
+      'Gazetari investigative',
+      'Redaktim & kurim editorial',
+      'Transmetim live',
+      'Shkrim analitik',
+      'Intervista & reportazh',
+      'Menaxhim redaksie',
+      'Media digjitale',
+      'SQ / EN'
+    ]
   },
 
   ticker: [
@@ -132,7 +190,7 @@ const en = {
   ui: {
     tickerLabel: 'Breaking News',
     logoTagline: 'Aurora Sallahu\'s Newspaper',
-    nav: { home: 'Home', news: 'News', politics: 'Politics', economy: 'Economy', culture: 'Culture', sport: 'Sport', opinion: 'Opinion', live: 'Live' },
+    nav: { home: 'Home', news: 'News', politics: 'Politics', economy: 'Economy', culture: 'Culture', sport: 'Sport', opinion: 'Opinion', live: 'Live', cv: 'CV — Aurora Sallahu' },
     heroLoading: 'Loading...',
     heroAlt: 'Top story',
     authorPrefix: 'By',
@@ -180,7 +238,65 @@ const en = {
     toastSubscribeOk: 'Thank you! You will receive the Daily Brief every morning.',
     toastSubscribeErr: 'Subscription error.',
     toastServerErr: 'Could not connect to server. Please try again.',
-    toastLoadErr: 'Error loading news.'
+    toastLoadErr: 'Error loading news.',
+    cvClose: 'Close',
+    cvEducation: 'Education',
+    cvExperience: 'Experience',
+    cvSkills: 'Skills',
+    cvContact: 'Contact'
+  },
+
+  cv: {
+    name: 'Aurora Sallahu',
+    title: 'Founder & Editor-in-Chief — AS NEWS',
+    location: 'Pristina, Kosovo',
+    email: 'aurora.sallahu@asnews.com',
+    image: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=600&q=80',
+    summary: 'Journalist and editor with 8+ years of experience in digital and broadcast media. Founder of AS NEWS — a platform delivering news with integrity, style and analytical depth for Albanian audiences.',
+    education: [
+      {
+        period: '2014 — 2018',
+        title: 'BA — Journalism & Mass Communication',
+        place: 'University of Pristina, Faculty of Philology',
+        desc: 'Graduated with distinction. Focus on investigative journalism, media ethics and TV reporting.'
+      },
+      {
+        period: '2011 — 2014',
+        title: 'High School',
+        place: 'Sami Frashëri Gymnasium, Pristina',
+        desc: 'Social-humanities track. Active in school newspaper and student debates.'
+      }
+    ],
+    experience: [
+      {
+        period: '2023 — Present',
+        title: 'Founder & Editor-in-Chief',
+        place: 'AS NEWS — Digital Newspaper',
+        desc: 'Leads the newsroom, curates top stories, hosts live broadcasts and upholds the platform\'s editorial standards.'
+      },
+      {
+        period: '2019 — 2023',
+        title: 'Journalist & Presenter',
+        place: 'RTK — Radio Television of Kosovo',
+        desc: 'Field reporting, political interviews and news programs. Coverage of elections and national events.'
+      },
+      {
+        period: '2018 — 2019',
+        title: 'Junior Journalist',
+        place: 'Koha Ditore — Pristina',
+        desc: 'Writing on politics, culture and society. Published in print and online.'
+      }
+    ],
+    skills: [
+      'Investigative journalism',
+      'Editing & editorial curation',
+      'Live broadcasting',
+      'Analytical writing',
+      'Interviews & reporting',
+      'Newsroom management',
+      'Digital media',
+      'SQ / EN'
+    ]
   },
 
   ticker: [

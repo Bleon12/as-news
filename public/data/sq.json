@@ -10,7 +10,8 @@
       "culture": "Kulturë",
       "sport": "Sport",
       "opinion": "Opinion",
-      "live": "Live"
+      "live": "Live",
+      "cv": "CV — Aurora Sallahu"
     },
     "heroLoading": "Duke ngarkuar...",
     "heroAlt": "Lajme kryesore",
@@ -59,7 +60,64 @@
     "toastSubscribeOk": "Faleminderit! Do të merrni Burimin e Ditës çdo mëngjes.",
     "toastSubscribeErr": "Gabim gjatë abonimit.",
     "toastServerErr": "Nuk u lidh me serverin. Provo përsëri.",
-    "toastLoadErr": "Gabim gjatë ngarkimit të lajmeve."
+    "toastLoadErr": "Gabim gjatë ngarkimit të lajmeve.",
+    "cvClose": "Mbyll",
+    "cvEducation": "Arsimimi",
+    "cvExperience": "Eksperienca",
+    "cvSkills": "Aftësitë",
+    "cvContact": "Kontakt"
+  },
+  "cv": {
+    "name": "Aurora Sallahu",
+    "title": "Themeluese & Redaktore Kryesore — AS NEWS",
+    "location": "Prishtinë, Kosovë",
+    "email": "aurora.sallahu@asnews.com",
+    "image": "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=600&q=80",
+    "summary": "Gazetare dhe redaktore me mbi 8 vjet përvojë në media digjitale dhe televizive. Themeluese e AS NEWS — platformës që sjell lajme me integritet, stil dhe thellësi analitike për audiencën shqiptare.",
+    "education": [
+      {
+        "period": "2014 — 2018",
+        "title": "Bachelor — Gazetari & Komunikim Masiv",
+        "place": "Universiteti i Prishtinës, Fakulteti i Filologjisë",
+        "desc": "Diplomë me distinksion. Fokus në gazetari investigative, etikë mediatike dhe reportazh televiziv."
+      },
+      {
+        "period": "2011 — 2014",
+        "title": "Shkolla e Mesme",
+        "place": "Gjimnazi \"Sami Frashëri\", Prishtinë",
+        "desc": "Drejtimi shoqëror-humanistik. Aktive në gazetën e shkollës dhe debatet studentore."
+      }
+    ],
+    "experience": [
+      {
+        "period": "2023 — Sot",
+        "title": "Themeluese & Redaktore Kryesore",
+        "place": "AS NEWS — Gazeta Digjitale",
+        "desc": "Udhëheq redaksionin, kuron lajmet kryesore, moderon transmetimet live dhe garanton standardin editorial të platformës."
+      },
+      {
+        "period": "2019 — 2023",
+        "title": "Gazetare & Prezantuese",
+        "place": "RTK — Radio Televizioni i Kosovës",
+        "desc": "Reportazhe nga terreni, intervista politike dhe emisione informative. Mbulim i zgjedhjeve dhe ngjarjeve kombëtare."
+      },
+      {
+        "period": "2018 — 2019",
+        "title": "Gazetare e Rinë",
+        "place": "Koha Ditore — Prishtinë",
+        "desc": "Shkrime për politikë, kulturë dhe shoqëri. Artikuj të publikuar në print dhe online."
+      }
+    ],
+    "skills": [
+      "Gazetari investigative",
+      "Redaktim & kurim editorial",
+      "Transmetim live",
+      "Shkrim analitik",
+      "Intervista & reportazh",
+      "Menaxhim redaksie",
+      "Media digjitale",
+      "SQ / EN"
+    ]
   },
   "ticker": [
     "Kryeprokurori Isufaj në veri të Kosovës: identifikimi i të gjeturve merr kohë",

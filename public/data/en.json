@@ -10,7 +10,8 @@
       "culture": "Culture",
       "sport": "Sport",
       "opinion": "Opinion",
-      "live": "Live"
+      "live": "Live",
+      "cv": "CV — Aurora Sallahu"
     },
     "heroLoading": "Loading...",
     "heroAlt": "Top story",
@@ -59,7 +60,64 @@
     "toastSubscribeOk": "Thank you! You will receive the Daily Brief every morning.",
     "toastSubscribeErr": "Subscription error.",
     "toastServerErr": "Could not connect to server. Please try again.",
-    "toastLoadErr": "Error loading news."
+    "toastLoadErr": "Error loading news.",
+    "cvClose": "Close",
+    "cvEducation": "Education",
+    "cvExperience": "Experience",
+    "cvSkills": "Skills",
+    "cvContact": "Contact"
+  },
+  "cv": {
+    "name": "Aurora Sallahu",
+    "title": "Founder & Editor-in-Chief — AS NEWS",
+    "location": "Pristina, Kosovo",
+    "email": "aurora.sallahu@asnews.com",
+    "image": "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=600&q=80",
+    "summary": "Journalist and editor with 8+ years of experience in digital and broadcast media. Founder of AS NEWS — a platform delivering news with integrity, style and analytical depth for Albanian audiences.",
+    "education": [
+      {
+        "period": "2014 — 2018",
+        "title": "BA — Journalism & Mass Communication",
+        "place": "University of Pristina, Faculty of Philology",
+        "desc": "Graduated with distinction. Focus on investigative journalism, media ethics and TV reporting."
+      },
+      {
+        "period": "2011 — 2014",
+        "title": "High School",
+        "place": "Sami Frashëri Gymnasium, Pristina",
+        "desc": "Social-humanities track. Active in school newspaper and student debates."
+      }
+    ],
+    "experience": [
+      {
+        "period": "2023 — Present",
+        "title": "Founder & Editor-in-Chief",
+        "place": "AS NEWS — Digital Newspaper",
+        "desc": "Leads the newsroom, curates top stories, hosts live broadcasts and upholds the platform's editorial standards."
+      },
+      {
+        "period": "2019 — 2023",
+        "title": "Journalist & Presenter",
+        "place": "RTK — Radio Television of Kosovo",
+        "desc": "Field reporting, political interviews and news programs. Coverage of elections and national events."
+      },
+      {
+        "period": "2018 — 2019",
+        "title": "Junior Journalist",
+        "place": "Koha Ditore — Pristina",
+        "desc": "Writing on politics, culture and society. Published in print and online."
+      }
+    ],
+    "skills": [
+      "Investigative journalism",
+      "Editing & editorial curation",
+      "Live broadcasting",
+      "Analytical writing",
+      "Interviews & reporting",
+      "Newsroom management",
+      "Digital media",
+      "SQ / EN"
+    ]
   },
   "ticker": [
     "Chief Prosecutor Isufaj in northern Kosovo: identification process may take time",

@@ -2955,3 +2955,239 @@ a {
     transition: transform 0.15s ease;
   }
 }
+
+/* ---- CV link (vetëm burger menu, mobile) ---- */
+@media (min-width: 769px) {
+  .nav-menu-only { display: none !important; }
+}
+
+@media (max-width: 768px) {
+  .nav-link-cv {
+    margin-top: 20px;
+    padding-top: 22px !important;
+    border-top: 1px solid var(--rose-blush);
+    font-size: 1.05rem !important;
+    color: var(--accent) !important;
+    opacity: 0.9;
+  }
+}
+
+/* ---- CV Modal ---- */
+.cv-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 500;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px 16px;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 0.35s ease, visibility 0.35s ease;
+}
+
+.cv-modal.open {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+.cv-modal-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(26, 22, 18, 0.55);
+  backdrop-filter: blur(6px);
+}
+
+.cv-modal-panel {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 720px;
+  max-height: min(90vh, 880px);
+  overflow-y: auto;
+  background: var(--cream);
+  border-radius: var(--radius-lg, 20px);
+  box-shadow: 0 24px 64px rgba(26, 22, 18, 0.2);
+  border: 1px solid var(--rose-blush);
+  animation: cvPanelIn 0.45s var(--ease-out-expo) both;
+}
+
+.cv-modal.open .cv-modal-panel {
+  animation: cvPanelIn 0.45s var(--ease-out-expo) both;
+}
+
+@keyframes cvPanelIn {
+  from { opacity: 0; transform: translateY(32px) scale(0.96); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.cv-modal-close {
+  position: sticky;
+  top: 12px;
+  float: right;
+  margin: 12px 16px 0 0;
+  width: 40px;
+  height: 40px;
+  border: none;
+  border-radius: 50%;
+  background: var(--rose-blush);
+  color: var(--text-primary);
+  font-size: 1.5rem;
+  line-height: 1;
+  cursor: pointer;
+  z-index: 2;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.cv-modal-close:hover {
+  background: var(--accent);
+  color: var(--pearl);
+  transform: scale(1.05);
+}
+
+.cv-modal-content {
+  padding: 8px 28px 32px;
+  clear: both;
+}
+
+.cv-modal-header {
+  display: grid;
+  grid-template-columns: 120px 1fr;
+  gap: 24px;
+  margin-bottom: 28px;
+  padding-bottom: 24px;
+  border-bottom: 2px solid var(--rose-blush);
+}
+
+.cv-modal-photo {
+  border-radius: var(--radius);
+  overflow: hidden;
+  border: 3px solid var(--rose-soft);
+  box-shadow: var(--shadow-soft);
+}
+
+.cv-modal-photo img {
+  width: 100%;
+  aspect-ratio: 1;
+  object-fit: cover;
+}
+
+.cv-modal-intro h2 {
+  font-family: var(--font-display);
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 4px;
+}
+
+.cv-modal-role {
+  font-size: 0.92rem;
+  color: var(--accent);
+  font-weight: 600;
+  margin-bottom: 12px;
+}
+
+.cv-modal-summary {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  line-height: 1.65;
+  margin-bottom: 14px;
+}
+
+.cv-modal-contact {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 0.82rem;
+  color: var(--text-muted);
+}
+
+.cv-modal-contact a {
+  color: var(--accent);
+  font-weight: 500;
+}
+
+.cv-modal-contact a:hover { text-decoration: underline; }
+
+.cv-modal-block {
+  margin-bottom: 24px;
+}
+
+.cv-modal-block h3 {
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 14px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--rose-blush);
+}
+
+.cv-entry {
+  margin-bottom: 18px;
+  padding-left: 14px;
+  border-left: 3px solid var(--rose-soft);
+}
+
+.cv-period {
+  display: inline-block;
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--accent);
+  letter-spacing: 0.04em;
+  margin-bottom: 4px;
+}
+
+.cv-entry h4 {
+  font-size: 0.95rem;
+  font-weight: 600;
+  margin-bottom: 2px;
+  color: var(--text-primary);
+}
+
+.cv-place {
+  font-size: 0.82rem;
+  color: var(--accent);
+  font-weight: 500;
+  margin-bottom: 6px;
+}
+
+.cv-desc {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+.cv-skills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.cv-skill {
+  background: var(--rose-blush);
+  color: var(--accent);
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 0.78rem;
+  font-weight: 500;
+}
+
+body.cv-open { overflow: hidden; }
+
+@media (max-width: 600px) {
+  .cv-modal-header {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+
+  .cv-modal-photo {
+    max-width: 140px;
+    margin: 0 auto;
+  }
+
+  .cv-modal-content { padding: 8px 20px 28px; }
+}
+
