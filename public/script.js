@@ -1,101 +1,65 @@
 /**
- * Aurora Lumina — Frontend (Static Netlify + Express API)
+ * Arber Mjekiqi — Interior Design & Laminate Portfolio
  */
 
 const API = '/api';
-const LANG_KEY = 'aurora-lang';
+const LANG_KEY = 'arber-lang';
 
 let currentLang = localStorage.getItem(LANG_KEY) || 'sq';
 let ui = {};
-let newsData = [];
-let totalNews = 0;
-let visibleCount = 6;
+let profile = {};
+let projects = [];
 let activeFilter = 'all';
-let liveStarted = false;
 let staticMode = null;
 let staticLocale = null;
-let staticLive = null;
 
-function langParam() {
-  return `lang=${currentLang}`;
-}
+const BG_SLIDES = [
+  'https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?w=1920&q=80',
+  'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=1920&q=80',
+  'https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=1920&q=80',
+  'https://images.unsplash.com/photo-1616486338812-ee8c5824a421?w=1920&q=80',
+  'https://images.unsplash.com/photo-1600566753190-17fced7a7440?w=1920&q=80',
+  'https://images.unsplash.com/photo-1497366216548-37526070297c?w=1920&q=80'
+];
 
 async function detectStaticMode() {
   if (staticMode !== null) return staticMode;
-
   const isLocal = location.hostname === 'localhost' || location.hostname === '127.0.0.1';
   if (isLocal) {
     try {
       const health = await fetch('/api/health');
-      if (health.ok) {
-        staticMode = false;
-        return false;
-      }
-    } catch {
-      /* fall through to static check */
-    }
+      if (health.ok) { staticMode = false; return false; }
+    } catch { /* static fallback */ }
   }
-
   try {
     const res = await fetch('/data/sq.json', { method: 'HEAD' });
     staticMode = res.ok;
-  } catch {
-    staticMode = false;
-  }
+  } catch { staticMode = false; }
   return staticMode;
 }
 
 async function loadStaticBundle() {
-  if (staticLocale && staticLive && staticLocale._lang === currentLang) {
-    return { locale: staticLocale, live: staticLive };
-  }
-  const [locale, live] = await Promise.all([
-    fetch(`/data/${currentLang}.json`).then((r) => {
-      if (!r.ok) throw new Error('Static locale missing');
-      return r.json();
-    }),
-    fetch(`/data/live.${currentLang}.json`).then((r) => {
-      if (!r.ok) throw new Error('Static live missing');
-      return r.json();
-    })
-  ]);
+  if (staticLocale && staticLocale._lang === currentLang) return staticLocale;
+  const locale = await fetch(`/data/${currentLang}.json`).then((r) => {
+    if (!r.ok) throw new Error('Static locale missing');
+    return r.json();
+  });
   locale._lang = currentLang;
   staticLocale = locale;
-  staticLive = live;
-  return { locale, live };
+  return locale;
 }
 
 function resolveStaticApi(url) {
   const d = staticLocale;
   const path = url.split('?')[0];
-  const params = new URLSearchParams(url.includes('?') ? url.split('?')[1] : '');
-
   if (path.endsWith('/ui')) return d.ui;
+  if (path.endsWith('/profile')) return d.profile;
   if (path.endsWith('/ticker')) return d.ticker;
-  if (path.endsWith('/featured')) return d.featured;
-  if (path.endsWith('/top-stories')) return d.topStories;
-  if (path.endsWith('/focus')) return d.focus;
-  if (path.endsWith('/editors-pick')) return d.editorsPick;
-  if (path.endsWith('/opinions')) return d.opinions;
-  if (path.endsWith('/live')) return staticLive;
-
-  if (path.endsWith('/latest')) {
-    const limit = parseInt(params.get('limit'), 10) || 10;
-    return d.news.slice(0, limit);
-  }
-
-  if (path.endsWith('/news')) {
-    let items = [...d.news];
-    const category = params.get('category');
-    if (category && category !== 'all') {
-      items = items.filter((n) => n.category === category);
-    }
-    const start = parseInt(params.get('offset'), 10) || 0;
-    const count = parseInt(params.get('limit'), 10) || items.length;
-    return { total: items.length, items: items.slice(start, start + count) };
-  }
-
-  throw new Error(`Unknown static endpoint: ${url}`);
+  if (path.endsWith('/services')) return d.services;
+  if (path.endsWith('/projects')) return d.projects;
+  if (path.endsWith('/cv')) return { education: d.education, experience: d.experience, skills: d.skills, certifications: d.certifications };
+  if (path.endsWith('/testimonials')) return d.testimonials;
+  throw new Error(`Unknown endpoint: ${url}`);
 }
 
 async function fetchJSON(url) {
@@ -103,9 +67,8 @@ async function fetchJSON(url) {
     await loadStaticBundle();
     return resolveStaticApi(url.replace(`${API}`, '/api'));
   }
-
   const sep = url.includes('?') ? '&' : '?';
-  const res = await fetch(`${url}${sep}${langParam()}`);
+  const res = await fetch(`${url}${sep}lang=${currentLang}`);
   if (!res.ok) throw new Error(`API error: ${res.status}`);
   return res.json();
 }
@@ -124,45 +87,32 @@ function getNested(obj, path) {
 }
 
 function applyUI() {
-  document.getElementById('tickerLabel').textContent = ui.tickerLabel;
-  document.getElementById('logoTagline').textContent = ui.logoTagline;
-  document.getElementById('footerTagline').textContent = ui.logoTagline;
-  document.getElementById('mainNewsTitle').textContent = ui.mainNewsTitle;
-  document.getElementById('latestNewsTitle').textContent = ui.latestNewsTitle;
-  document.getElementById('seeAllNews').textContent = ui.seeAllNews;
-  document.getElementById('editorsPickTitle').textContent = ui.editorsPickTitle;
-  document.getElementById('editorsPickSub').textContent = ui.editorsPickSub;
-  document.getElementById('newsTitle').textContent = ui.newsTitle;
-  document.getElementById('loadMore').textContent = ui.loadMore;
-  document.getElementById('opinionTitle').textContent = ui.opinionTitle;
-  document.getElementById('opinionSub').textContent = ui.opinionSub;
-  document.getElementById('newsletterTitle').textContent = ui.newsletterTitle;
-  document.getElementById('newsletterSub').textContent = ui.newsletterSub;
-  document.getElementById('emailInput').placeholder = ui.emailPlaceholder;
-  document.getElementById('subscribeBtn').textContent = ui.subscribe;
-  document.getElementById('footerDesc').textContent = ui.footerDesc;
-  document.getElementById('footerSections').textContent = ui.footerSections;
-  document.getElementById('footerAbout').textContent = ui.footerAbout;
-  document.getElementById('footerLegal').textContent = ui.footerLegal;
-  document.getElementById('footerHistory').textContent = ui.footerHistory;
-  document.getElementById('footerEditorial').textContent = ui.footerEditorial;
-  document.getElementById('footerCareers').textContent = ui.footerCareers;
-  document.getElementById('footerContact').textContent = ui.footerContact;
-  document.getElementById('footerPrivacy').textContent = ui.footerPrivacy;
-  document.getElementById('footerTerms').textContent = ui.footerTerms;
-  document.getElementById('footerCookies').textContent = ui.footerCookies;
-  document.getElementById('footerRights').textContent = ui.footerRights;
-  document.getElementById('footerMotto').textContent = ui.footerMotto;
-  document.getElementById('searchBtn').ariaLabel = ui.searchAria;
+  const ids = {
+    tickerLabel: 'tickerLabel', logoTagline: 'logoTagline', footerTagline: 'footerTagline',
+    heroBadge: 'heroBadge', heroCta: 'heroCta', heroCta2: 'heroCta2',
+    aboutTitle: 'aboutTitle', aboutSub: 'aboutSub',
+    servicesTitle: 'servicesTitle', servicesSub: 'servicesSub',
+    portfolioTitle: 'portfolioTitle', portfolioSub: 'portfolioSub',
+    filterAll: 'filterAll', cvTitle: 'cvTitle', cvSub: 'cvSub',
+    eduTitle: 'eduTitle', expTitle: 'expTitle', skillsTitle: 'skillsTitle',
+    testimonialsTitle: 'testimonialsTitle', testimonialsSub: 'testimonialsSub',
+    contactTitle: 'contactTitle', contactSub: 'contactSub',
+    contactSend: 'contactSend', contactCall: 'contactCall',
+    footerDesc: 'footerDesc', footerServices: 'footerServices',
+    footerLinks: 'footerLinks', footerContact: 'footerContact',
+    footerRights: 'footerRights', footerMotto: 'footerMotto',
+    headerCta: 'headerCta'
+  };
+  Object.entries(ids).forEach(([key, id]) => {
+    const el = document.getElementById(id);
+    if (el && ui[key]) el.textContent = ui[key];
+  });
+
+  document.getElementById('contactName').placeholder = ui.contactName;
+  document.getElementById('contactEmail').placeholder = ui.contactEmail;
+  document.getElementById('contactPhone').placeholder = ui.contactPhone;
+  document.getElementById('contactMessage').placeholder = ui.contactMessage;
   document.getElementById('menuToggle').ariaLabel = ui.menuAria;
-  document.getElementById('liveTitle').textContent = ui.liveTitle;
-  document.getElementById('liveSub').textContent = ui.liveSub;
-  document.getElementById('liveBadgeText').textContent = ui.liveBadge;
-  document.querySelector('.viewers-label').textContent = ui.liveViewers;
-  document.getElementById('liveNowLabel').textContent = ui.liveNow;
-  document.getElementById('liveScheduleTitle').textContent = ui.liveUpcoming;
-  document.getElementById('liveOfflineText').textContent = ui.liveOffline;
-  document.getElementById('livePlayBtn').ariaLabel = ui.liveWatch;
 
   document.querySelectorAll('[data-i18n]').forEach((el) => {
     const val = getNested(ui, el.dataset.i18n);
@@ -170,255 +120,142 @@ function applyUI() {
   });
 
   document.title = currentLang === 'en'
-    ? 'AS NEWS | Digital Newspaper'
-    : 'AS NEWS | Gazeta Digjitale';
-}
-
-async function loadUI() {
-  ui = await fetchJSON(`${API}/ui`);
-  applyUI();
+    ? 'Arber Mjekiqi | Interior Design & Flooring'
+    : 'Arber Mjekiqi | Dizajn i Brendshëm & Laminat';
 }
 
 async function loadTicker() {
   const items = await fetchJSON(`${API}/ticker`);
   const el = document.getElementById('tickerContent');
   if (!el) return;
-  const html = items.map((text) => `<span>${text}</span><span>•</span>`).join('');
+  const html = items.map((t) => `<span>${t}</span><span>•</span>`).join('');
   el.innerHTML = html + html;
 }
 
-async function loadFeatured() {
-  const data = await fetchJSON(`${API}/featured`);
+async function loadProfile() {
+  profile = await fetchJSON(`${API}/profile`);
+  document.getElementById('heroName').textContent = profile.name;
+  document.getElementById('heroTitle').textContent = profile.title;
+  document.getElementById('heroBio').textContent = profile.bio;
+  document.getElementById('heroImage').src = profile.image;
+  document.getElementById('heroImage').alt = profile.name;
+  document.getElementById('aboutImage').src = profile.image;
+  document.getElementById('aboutImage').alt = profile.name;
+  document.getElementById('aboutBio1').textContent = profile.bio;
+  document.getElementById('aboutBio2').textContent = profile.bio2;
+  document.getElementById('aboutLocation').textContent = profile.location;
+  document.getElementById('aboutPhone').textContent = profile.phone;
+  document.getElementById('aboutEmail').textContent = profile.email;
+  document.getElementById('footerPhone').textContent = profile.phone;
+  document.getElementById('footerEmail').textContent = profile.email;
+  document.getElementById('footerLocation').textContent = profile.location;
+  document.querySelector('.btn-call').href = `tel:${profile.phone.replace(/\s/g, '')}`;
 
-  document.getElementById('heroImage').src = data.image;
-  document.getElementById('heroImage').alt = data.title;
-  document.getElementById('heroCategory').textContent = data.catLabel;
-  document.getElementById('heroDate').textContent = data.date;
-  document.getElementById('heroDate').dateTime = data.dateIso;
-  document.getElementById('heroTitle').textContent = data.title;
-  document.getElementById('heroExcerpt').textContent = data.excerpt;
-  document.getElementById('heroAuthor').textContent = `${ui.authorPrefix} ${data.author}`;
-  document.getElementById('heroReadTime').textContent = data.readTime;
-  const timeEl = document.getElementById('heroTime');
-  if (timeEl) timeEl.textContent = data.time || '';
+  const statsEl = document.getElementById('heroStats');
+  statsEl.innerHTML = profile.stats.map((s) => `
+    <div class="stat-item">
+      <span class="stat-value">${s.value}</span>
+      <span class="stat-label">${s.label}</span>
+    </div>
+  `).join('');
 }
 
-async function loadTopStories() {
-  const items = await fetchJSON(`${API}/top-stories`);
-  const el = document.getElementById('topStoriesGrid');
-  if (!el) return;
-
-  el.innerHTML = items.map((item) => `
-    <article class="top-secondary-card">
-      <div class="top-secondary-image">
-        <img src="${item.image}" alt="${item.title}">
-        <span class="category-badge soft">${item.catLabel}</span>
-      </div>
-      <div class="top-secondary-body">
-        <div class="top-meta">
-          <time>${item.date}</time>
-          <span class="top-time">${item.time || ''}</span>
-        </div>
-        <h3>${item.title}</h3>
-        <p>${item.excerpt || ''}</p>
-      </div>
+async function loadServices() {
+  const items = await fetchJSON(`${API}/services`);
+  document.getElementById('servicesGrid').innerHTML = items.map((s) => `
+    <article class="service-card">
+      <span class="service-icon">${s.icon}</span>
+      <h3>${s.title}</h3>
+      <p>${s.desc}</p>
     </article>
   `).join('');
 }
 
-async function loadLatest() {
-  const items = await fetchJSON(`${API}/latest?limit=10`);
-  const el = document.getElementById('latestNewsList');
-  if (!el) return;
+async function loadProjects() {
+  projects = await fetchJSON(`${API}/projects`);
+  renderProjects();
+}
 
-  el.innerHTML = items.map((item, i) => `
-    <li class="latest-item${i === 0 ? ' latest-item-first' : ''}">
-      <span class="latest-time">${item.time || ''}</span>
-      <div class="latest-content">
-        <span class="latest-cat">${item.catLabel}</span>
-        <a href="#" class="latest-link">${item.title}</a>
+function renderProjects() {
+  const filtered = activeFilter === 'all'
+    ? projects
+    : projects.filter((p) => p.category === activeFilter);
+
+  document.getElementById('portfolioGrid').innerHTML = filtered.map((p) => `
+    <article class="project-card">
+      <div class="project-image">
+        <img src="${p.image}" alt="${p.title}" loading="lazy">
+        <span class="project-badge">${p.catLabel}</span>
       </div>
-    </li>
-  `).join('');
-}
-
-async function loadTopNewsRow() {
-  const items = await fetchJSON(`${API}/focus`);
-  const el = document.getElementById('topNewsRow');
-  if (!el) return;
-
-  el.innerHTML = items.map((item) => `
-    <article class="top-row-card">
-      <div class="top-row-image">
-        <img src="${item.image}" alt="${item.title}">
-      </div>
-      <div class="top-row-body">
-        <span class="cat">${item.catLabel}</span>
-        <h4>${item.title}</h4>
-        <time>${item.date}${item.time ? ` · ${item.time}` : ''}</time>
-      </div>
-    </article>
-  `).join('');
-}
-
-async function loadFocus() {
-  await loadTopNewsRow();
-}
-
-async function loadEditorsPick() {
-  const items = await fetchJSON(`${API}/editors-pick`);
-  const el = document.getElementById('pickGrid');
-  if (!el) return;
-
-  el.innerHTML = items.map((item) => {
-    if (item.featured) {
-      return `
-        <article class="pick-card featured-pick">
-          <div class="pick-image">
-            <img src="${item.image}" alt="${item.title}">
-          </div>
-          <div class="pick-body">
-            <span class="category-badge soft">${item.catLabel}</span>
-            <h3>${item.title}</h3>
-            <p>${item.excerpt || ''}</p>
-            <a href="#" class="read-more">${ui.readArticle}</a>
-          </div>
-        </article>
-      `;
-    }
-    return `
-      <article class="pick-card">
-        <div class="pick-image small">
-          <img src="${item.image}" alt="${item.title}">
-        </div>
-        <div class="pick-body">
-          <span class="category-badge soft">${item.catLabel}</span>
-          <h3>${item.title}</h3>
-          <a href="#" class="read-more">${ui.readMore}</a>
-        </div>
-      </article>
-    `;
-  }).join('');
-}
-
-async function loadOpinions() {
-  const items = await fetchJSON(`${API}/opinions`);
-  const el = document.getElementById('opinionGrid');
-  if (!el) return;
-
-  el.innerHTML = items.map((item) => `
-    <article class="opinion-card">
-      <div class="opinion-avatar">${item.initials}</div>
-      <blockquote>"${item.quote}"</blockquote>
-      <cite>— ${item.cite}</cite>
-    </article>
-  `).join('');
-}
-
-let liveStreamUrl = '';
-
-function startLiveStream() {
-  if (liveStarted || !liveStreamUrl) return;
-  liveStarted = true;
-  const iframe = document.getElementById('liveIframe');
-  const placeholder = document.getElementById('livePlaceholder');
-  iframe.src = liveStreamUrl + (liveStreamUrl.includes('?') ? '&' : '?') + 'autoplay=1';
-  placeholder.classList.add('hidden');
-  iframe.classList.remove('hidden');
-}
-
-async function loadLive() {
-  const data = await fetchJSON(`${API}/live`);
-  const badge = document.getElementById('liveBadge');
-  const placeholder = document.getElementById('livePlaceholder');
-  const iframe = document.getElementById('liveIframe');
-  const poster = document.getElementById('livePoster');
-
-  poster.src = data.poster;
-  poster.alt = data.currentShow;
-  document.querySelector('.viewers-count').textContent = data.viewers.toLocaleString();
-  document.getElementById('liveShowTitle').textContent = data.currentShow;
-
-  const scheduleEl = document.getElementById('scheduleList');
-  scheduleEl.innerHTML = data.schedule.map((item) => `
-    <li class="schedule-item">
-      <span class="schedule-time">${item.time}</span>
-      <span class="schedule-title">${item.title}</span>
-    </li>
-  `).join('');
-
-  if (data.isLive) {
-    badge.classList.remove('offline');
-    liveStreamUrl = data.streamUrl;
-  } else {
-    badge.classList.add('offline');
-    liveStreamUrl = '';
-    document.getElementById('liveOfflineText').textContent = ui.liveOfflineSub;
-  }
-}
-
-async function loadNews() {
-  const params = new URLSearchParams({ limit: visibleCount, offset: 0 });
-  if (activeFilter !== 'all') params.set('category', activeFilter);
-
-  const data = await fetchJSON(`${API}/news?${params}`);
-  newsData = data.items;
-  totalNews = data.total;
-  renderNews();
-}
-
-function renderNews() {
-  const grid = document.getElementById('newsGrid');
-  if (!grid) return;
-
-  grid.innerHTML = newsData.map((item, i) => `
-    <article class="news-card fade-in" data-category="${item.category}" style="animation-delay: ${i * 0.12}s">
-      <div class="news-card-image">
-        <img src="${item.image}" alt="${item.title}">
-      </div>
-      <div class="news-card-body">
-        <span class="cat">${item.catLabel}</span>
-        <h3>${item.title}</h3>
-        <p>${item.excerpt}</p>
-        <div class="news-card-footer">
-          <span>${item.author}</span>
-          <span>${item.date} · ${item.readTime}</span>
+      <div class="project-body">
+        <h3>${p.title}</h3>
+        <p>${p.desc}</p>
+        <div class="project-meta">
+          <span>📐 ${p.area}</span>
+          <span>⏱ ${p.duration}</span>
         </div>
       </div>
     </article>
   `).join('');
+}
 
-  const loadBtn = document.getElementById('loadMore');
-  if (loadBtn) {
-    loadBtn.style.display = visibleCount >= totalNews ? 'none' : 'inline-block';
-  }
+async function loadCV() {
+  const data = await fetchJSON(`${API}/cv`);
+
+  document.getElementById('educationTimeline').innerHTML = data.education.map((e) => `
+    <div class="timeline-item">
+      <span class="timeline-period">${e.period}</span>
+      <h4>${e.title}</h4>
+      <p class="timeline-place">${e.place}</p>
+      <p class="timeline-desc">${e.desc}</p>
+    </div>
+  `).join('');
+
+  document.getElementById('experienceTimeline').innerHTML = data.experience.map((e) => `
+    <div class="timeline-item">
+      <span class="timeline-period">${e.period}</span>
+      <h4>${e.title}</h4>
+      <p class="timeline-place">${e.place}</p>
+      <p class="timeline-desc">${e.desc}</p>
+    </div>
+  `).join('');
+
+  document.getElementById('skillsList').innerHTML = data.skills.map((s) =>
+    `<span class="skill-tag">${s}</span>`
+  ).join('');
+
+  document.getElementById('certsList').innerHTML = data.certifications.map((c) =>
+    `<li>${c}</li>`
+  ).join('');
+}
+
+async function loadTestimonials() {
+  const items = await fetchJSON(`${API}/testimonials`);
+  document.getElementById('testimonialsGrid').innerHTML = items.map((t) => `
+    <article class="testimonial-card">
+      <div class="testimonial-avatar">${t.initials}</div>
+      <blockquote>"${t.quote}"</blockquote>
+      <cite>— ${t.cite}</cite>
+    </article>
+  `).join('');
 }
 
 async function reloadAll() {
-  liveStarted = false;
   staticLocale = null;
-  staticLive = null;
-  document.getElementById('livePlaceholder')?.classList.remove('hidden');
-  document.getElementById('liveIframe')?.classList.add('hidden');
-  document.getElementById('liveIframe').src = '';
-
-  await loadUI();
+  ui = await fetchJSON(`${API}/ui`);
+  applyUI();
   await Promise.all([
     loadTicker(),
-    loadFeatured(),
-    loadTopStories(),
-    loadLatest(),
-    loadTopNewsRow(),
-    loadLive(),
-    loadEditorsPick(),
-    loadOpinions(),
-    loadNews()
+    loadProfile(),
+    loadServices(),
+    loadProjects(),
+    loadCV(),
+    loadTestimonials()
   ]);
 }
 
 function initLangSwitch() {
   setLang(currentLang);
-
   document.querySelectorAll('.lang-btn').forEach((btn) => {
     btn.addEventListener('click', async () => {
       if (btn.dataset.lang === currentLang) return;
@@ -427,9 +264,7 @@ function initLangSwitch() {
       try {
         await reloadAll();
         initScrollReveal();
-      } catch {
-        showToast(ui.toastLoadErr);
-      }
+      } catch { showToast(ui.toastLoadErr); }
     });
   });
 }
@@ -440,133 +275,98 @@ function initFilters() {
       document.querySelectorAll('.tab').forEach((t) => t.classList.remove('active'));
       tab.classList.add('active');
       activeFilter = tab.dataset.filter;
-      visibleCount = 6;
-      loadNews();
+      renderProjects();
     });
   });
 }
 
-function initLoadMore() {
-  document.getElementById('loadMore')?.addEventListener('click', () => {
-    visibleCount += 3;
-    loadNews();
+function initContactForm() {
+  document.getElementById('contactForm')?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const form = e.target;
+    const data = {
+      name: form.querySelector('#contactName').value.trim(),
+      email: form.querySelector('#contactEmail').value.trim(),
+      phone: form.querySelector('#contactPhone').value.trim(),
+      message: form.querySelector('#contactMessage').value.trim(),
+      lang: currentLang
+    };
+
+    if (await detectStaticMode()) {
+      const key = 'arber-contacts';
+      const saved = JSON.parse(localStorage.getItem(key) || '[]');
+      saved.push({ ...data, date: new Date().toISOString() });
+      localStorage.setItem(key, JSON.stringify(saved));
+      form.reset();
+      showToast(ui.toastContactOk);
+      return;
+    }
+
+    try {
+      const res = await fetch(`${API}/contact`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data)
+      });
+      const result = await res.json();
+      if (!res.ok) { showToast(result.error || ui.toastContactErr); return; }
+      form.reset();
+      showToast(result.message || ui.toastContactOk);
+    } catch { showToast(ui.toastContactErr); }
   });
 }
-
-const BG_SLIDES = [
-  'https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?w=1920&q=80',
-  'https://images.unsplash.com/photo-1586892478167-f19877ac8611?w=1920&q=80',
-  'https://images.unsplash.com/photo-1504711432789-3849292768d0?w=1920&q=80',
-  'https://images.unsplash.com/photo-1495020689067-958852a7765e?w=1920&q=80',
-  'https://images.unsplash.com/photo-1529107386315-e1a2ed48a620?w=1920&q=80',
-  'https://images.unsplash.com/photo-1516321497487-e488888be753?w=1920&q=80',
-  'https://images.unsplash.com/photo-1475721027785-f74eccf877e0?w=1920&q=80',
-  'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1920&q=80'
-];
 
 function initBackgroundSlideshow() {
   const container = document.getElementById('pageBgSlideshow');
   if (!container) return;
-
-  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   BG_SLIDES.forEach((url, i) => {
     const slide = document.createElement('div');
     slide.className = `bg-slide${i === 0 ? ' active' : ''}`;
     slide.style.backgroundImage = `url('${url}')`;
     container.appendChild(slide);
   });
-
   const slides = container.querySelectorAll('.bg-slide');
-  if (slides.length < 2 || reduced) return;
-
+  if (slides.length < 2) return;
   let current = 0;
-  const interval = window.innerWidth <= 768 ? 7000 : 5500;
-
   setInterval(() => {
     slides[current].classList.remove('active');
-    slides[current].classList.add('exit');
     current = (current + 1) % slides.length;
     slides[current].classList.add('active');
-    slides[current].classList.remove('exit');
-
-    const prev = (current - 1 + slides.length) % slides.length;
-    setTimeout(() => slides[prev].classList.remove('exit'), 2800);
-  }, interval);
+  }, 6000);
 }
 
-function initParallaxBackground() {
-  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-
-  const slideshow = document.getElementById('pageBgSlideshow');
-  const mesh = document.querySelector('.page-bg-mesh');
-  if (!slideshow || window.innerWidth <= 768) return;
-
-  let ticking = false;
-  window.addEventListener('scroll', () => {
-    if (ticking) return;
-    ticking = true;
-    requestAnimationFrame(() => {
-      const y = window.scrollY;
-      slideshow.style.transform = `translateY(${y * 0.12}px) scale(1.02)`;
-      if (mesh) mesh.style.transform = `translateY(${y * 0.06}px)`;
-      ticking = false;
-    });
-  }, { passive: true });
-}
-
-function initBackgroundVideo() {
-  const video = document.getElementById('pageBgVideo');
-  const fallback = document.querySelector('.page-bg-fallback');
-  if (!video) return;
-
-  const motionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
-
-  const useFallback = () => {
-    video.pause();
-    video.classList.add('is-hidden');
-    if (fallback) fallback.classList.add('is-active');
-  };
-
-  if (motionQuery.matches || navigator.connection?.saveData) {
-    useFallback();
-    return;
-  }
-
-  video.addEventListener('error', useFallback);
-
-  const tryPlay = () => {
-    video.play().catch(useFallback);
-  };
-
-  if (video.readyState >= 2) tryPlay();
-  else video.addEventListener('loadeddata', tryPlay, { once: true });
-
-  document.addEventListener('visibilitychange', () => {
-    if (document.hidden) video.pause();
-    else if (!video.classList.contains('is-hidden')) tryPlay();
+function initMobileMenu() {
+  const toggle = document.getElementById('menuToggle');
+  const nav = document.getElementById('mainNav');
+  if (!toggle || !nav) return;
+  toggle.addEventListener('click', () => {
+    const open = nav.classList.toggle('open');
+    toggle.classList.toggle('active', open);
+    document.body.classList.toggle('nav-open', open);
   });
-
-  motionQuery.addEventListener('change', (e) => {
-    if (e.matches) useFallback();
+  nav.querySelectorAll('.nav-link').forEach((link) => {
+    link.addEventListener('click', () => {
+      nav.classList.remove('open');
+      toggle.classList.remove('active');
+      document.body.classList.remove('nav-open');
+    });
   });
 }
 
 function initMobileBottomNav() {
   const nav = document.getElementById('mobileBottomNav');
   if (!nav) return;
-
   const items = nav.querySelectorAll('.mob-nav-item');
-  const sectionMap = [
-    { id: 'live', href: '#live' },
-    { id: 'lajme', href: '#lajme' },
-    { id: 'opinion', href: '#opinion' }
+  const sections = [
+    { id: 'projekte', href: '#projekte' },
+    { id: 'cv', href: '#cv' },
+    { id: 'kontakt', href: '#kontakt' }
   ];
 
   const setActive = (href) => {
     items.forEach((item) => {
-      const itemHref = item.getAttribute('href');
-      const isHome = itemHref === '#';
-      item.classList.toggle('active', href === itemHref || (isHome && (!href || href === '#')));
+      const h = item.getAttribute('href');
+      item.classList.toggle('active', href === h || (h === '#' && (!href || href === '#')));
     });
   };
 
@@ -577,139 +377,56 @@ function initMobileBottomNav() {
   });
 
   items.forEach((item) => {
-    if (item.getAttribute('href') === '#') return;
-    item.addEventListener('click', () => setActive(item.getAttribute('href')));
+    if (item.getAttribute('href') !== '#') {
+      item.addEventListener('click', () => setActive(item.getAttribute('href')));
+    }
   });
 
   const observer = new IntersectionObserver((entries) => {
-    const visible = entries
-      .filter((e) => e.isIntersecting)
-      .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
-    if (!visible) return;
-    const match = sectionMap.find((s) => s.id === visible.target.id);
+    const vis = entries.filter((e) => e.isIntersecting).sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+    if (!vis) return;
+    const match = sections.find((s) => s.id === vis.target.id);
     if (match) setActive(match.href);
-  }, { threshold: [0.15, 0.35, 0.55], rootMargin: '-30% 0px -35% 0px' });
+  }, { threshold: 0.2, rootMargin: '-30% 0px -40% 0px' });
 
-  sectionMap.forEach(({ id }) => {
+  sections.forEach(({ id }) => {
     const el = document.getElementById(id);
     if (el) observer.observe(el);
   });
 
-  let scrollTimeout;
   window.addEventListener('scroll', () => {
-    clearTimeout(scrollTimeout);
-    scrollTimeout = setTimeout(() => {
-      if (window.scrollY < 120) setActive('#');
-    }, 80);
+    if (window.scrollY < 100) setActive('#');
   }, { passive: true });
-}
-
-function initMobileMenu() {
-  const toggle = document.getElementById('menuToggle');
-  const nav = document.getElementById('mainNav');
-  if (!toggle || !nav) return;
-
-  toggle.addEventListener('click', () => {
-    const isOpen = nav.classList.toggle('open');
-    toggle.classList.toggle('active', isOpen);
-    document.body.classList.toggle('nav-open', isOpen);
-  });
-
-  nav.querySelectorAll('.nav-link').forEach((link) => {
-    link.addEventListener('click', () => {
-      nav.classList.remove('open');
-      toggle.classList.remove('active');
-      document.body.classList.remove('nav-open');
-    });
-  });
-}
-
-function initNewsletter() {
-  const form = document.getElementById('newsletterForm');
-  if (!form) return;
-
-  form.addEventListener('submit', async (e) => {
-    e.preventDefault();
-    const input = form.querySelector('input');
-    const email = input.value.trim();
-    if (!email) return;
-
-    if (await detectStaticMode()) {
-      const key = 'aurora-newsletter';
-      const saved = JSON.parse(localStorage.getItem(key) || '[]');
-      if (saved.includes(email.toLowerCase())) {
-        showToast(currentLang === 'en' ? 'This email is already subscribed' : 'Ky email është tashmë i abonuar');
-        return;
-      }
-      saved.push(email.toLowerCase());
-      localStorage.setItem(key, JSON.stringify(saved));
-      input.value = '';
-      showToast(ui.toastSubscribeOk);
-      return;
-    }
-
-    try {
-      const res = await fetch(`${API}/newsletter`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, lang: currentLang })
-      });
-
-      const data = await res.json();
-
-      if (!res.ok) {
-        showToast(data.error || ui.toastSubscribeErr);
-        return;
-      }
-
-      input.value = '';
-      showToast(data.message || ui.toastSubscribeOk);
-    } catch {
-      showToast(ui.toastServerErr);
-    }
-  });
 }
 
 function initScrollReveal() {
   const reveals = document.querySelectorAll('.reveal:not(.revealed)');
-  if (!reveals.length) return;
-
   const observer = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
       if (entry.isIntersecting) {
         entry.target.classList.add('revealed');
-        entry.target.querySelectorAll('.news-card, .latest-item').forEach((child, i) => {
-          child.style.animationDelay = `${i * 0.07}s`;
-        });
         observer.unobserve(entry.target);
       }
     });
-  }, { threshold: 0.06, rootMargin: '0px 0px -40px 0px' });
-
+  }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
   reveals.forEach((el) => observer.observe(el));
 }
 
 function initHeaderScroll() {
   const header = document.querySelector('.header');
   if (!header) return;
-
-  const onScroll = () => {
-    header.classList.toggle('scrolled', window.scrollY > 24);
-  };
-
+  const onScroll = () => header.classList.toggle('scrolled', window.scrollY > 20);
   window.addEventListener('scroll', onScroll, { passive: true });
   onScroll();
 }
 
 function showToast(message) {
   document.querySelector('.toast')?.remove();
-
   const toast = document.createElement('div');
   toast.className = 'toast';
   toast.textContent = message;
   document.body.appendChild(toast);
   requestAnimationFrame(() => toast.classList.add('visible'));
-
   setTimeout(() => {
     toast.classList.remove('visible');
     setTimeout(() => toast.remove(), 400);
@@ -719,21 +436,16 @@ function showToast(message) {
 document.addEventListener('DOMContentLoaded', async () => {
   initLangSwitch();
   initFilters();
-  initLoadMore();
+  initContactForm();
   initMobileMenu();
   initMobileBottomNav();
   initBackgroundSlideshow();
-  initBackgroundVideo();
-  initParallaxBackground();
-  initNewsletter();
   initHeaderScroll();
-  document.getElementById('livePlayBtn')?.addEventListener('click', startLiveStream);
-
   try {
     await reloadAll();
     initScrollReveal();
   } catch (err) {
     console.error(err);
-    showToast(ui.toastLoadErr || 'Error');
+    showToast('Error loading');
   }
 });

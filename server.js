@@ -3,29 +3,27 @@ const cors = require('cors');
 const path = require('path');
 const fs = require('fs');
 
-const { getLocale, resolveLang, live } = require('./data/content');
+const { getLocale, resolveLang } = require('./data/content');
 
 const app = express();
 const PORT = process.env.PORT || 12345;
-const SUBSCRIBERS_FILE = path.join(__dirname, 'data', 'subscribers.json');
+const CONTACTS_FILE = path.join(__dirname, 'data', 'contacts.json');
 
 app.use(cors());
 app.use(express.json());
 app.use(express.static(path.join(__dirname, 'public')));
 
-function readSubscribers() {
+function readContacts() {
   try {
-    if (fs.existsSync(SUBSCRIBERS_FILE)) {
-      return JSON.parse(fs.readFileSync(SUBSCRIBERS_FILE, 'utf8'));
+    if (fs.existsSync(CONTACTS_FILE)) {
+      return JSON.parse(fs.readFileSync(CONTACTS_FILE, 'utf8'));
     }
-  } catch {
-    return [];
-  }
+  } catch { return []; }
   return [];
 }
 
-function saveSubscribers(list) {
-  fs.writeFileSync(SUBSCRIBERS_FILE, JSON.stringify(list, null, 2), 'utf8');
+function saveContacts(list) {
+  fs.writeFileSync(CONTACTS_FILE, JSON.stringify(list, null, 2), 'utf8');
 }
 
 function langFromReq(req) {
@@ -33,113 +31,72 @@ function langFromReq(req) {
 }
 
 app.get('/api/health', (_req, res) => {
-  res.json({ status: 'ok', name: 'AS NEWS API' });
+  res.json({ status: 'ok', name: 'Arber Mjekiqi Portfolio API' });
 });
 
 app.get('/api/ui', (req, res) => {
-  const lang = langFromReq(req);
-  res.json(getLocale(lang).ui);
+  res.json(getLocale(langFromReq(req)).ui);
+});
+
+app.get('/api/profile', (req, res) => {
+  res.json(getLocale(langFromReq(req)).profile);
 });
 
 app.get('/api/ticker', (req, res) => {
   res.json(getLocale(langFromReq(req)).ticker);
 });
 
-app.get('/api/featured', (req, res) => {
-  res.json(getLocale(langFromReq(req)).featured);
+app.get('/api/services', (req, res) => {
+  res.json(getLocale(langFromReq(req)).services);
 });
 
-app.get('/api/focus', (req, res) => {
-  res.json(getLocale(langFromReq(req)).focus);
+app.get('/api/projects', (req, res) => {
+  res.json(getLocale(langFromReq(req)).projects);
 });
 
-app.get('/api/top-stories', (req, res) => {
-  res.json(getLocale(langFromReq(req)).topStories);
-});
-
-app.get('/api/latest', (req, res) => {
-  const limit = parseInt(req.query.limit, 10) || 10;
-  const items = getLocale(langFromReq(req)).news.slice(0, limit);
-  res.json(items);
-});
-
-app.get('/api/editors-pick', (req, res) => {
-  res.json(getLocale(langFromReq(req)).editorsPick);
-});
-
-app.get('/api/opinions', (req, res) => {
-  res.json(getLocale(langFromReq(req)).opinions);
-});
-
-app.get('/api/live', (req, res) => {
-  const lang = langFromReq(req);
+app.get('/api/cv', (req, res) => {
+  const locale = getLocale(langFromReq(req));
   res.json({
-    isLive: live.isLive,
-    streamUrl: live.streamUrl,
-    poster: live.poster,
-    viewers: live.viewers,
-    currentShow: live.currentShow[lang],
-    schedule: live.schedule.map((item) => ({
-      time: item.time,
-      title: item.title[lang]
-    }))
+    education: locale.education,
+    experience: locale.experience,
+    skills: locale.skills,
+    certifications: locale.certifications
   });
 });
 
-app.get('/api/news', (req, res) => {
-  const { category, limit, offset } = req.query;
-  let items = [...getLocale(langFromReq(req)).news];
-
-  if (category && category !== 'all') {
-    items = items.filter((n) => n.category === category);
-  }
-
-  const start = parseInt(offset, 10) || 0;
-  const count = parseInt(limit, 10) || items.length;
-  const slice = items.slice(start, start + count);
-
-  res.json({ total: items.length, items: slice });
+app.get('/api/testimonials', (req, res) => {
+  res.json(getLocale(langFromReq(req)).testimonials);
 });
 
-app.get('/api/news/:id', (req, res) => {
-  const id = parseInt(req.params.id, 10);
-  const article = getLocale(langFromReq(req)).news.find((n) => n.id === id);
-
-  if (!article) {
-    const err = langFromReq(req) === 'en' ? 'Article not found' : 'Artikulli nuk u gjet';
-    return res.status(404).json({ error: err });
+app.post('/api/contact', (req, res) => {
+  const { name, email, phone, message, lang } = req.body;
+  if (!name || !email || !message) {
+    return res.status(400).json({
+      error: lang === 'en' ? 'Name, email and message are required.' : 'Emri, email dhe mesazhi janë të detyrueshëm.'
+    });
   }
 
-  res.json(article);
-});
-
-app.post('/api/newsletter', (req, res) => {
-  const lang = resolveLang(req.body.lang);
-  const ui = getLocale(lang).ui;
-  const { email } = req.body;
-
-  if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-    const err = lang === 'en' ? 'Invalid email' : 'Email i pavlefshëm';
-    return res.status(400).json({ error: err });
+  const contacts = readContacts();
+  if (contacts.some((c) => c.email === email.toLowerCase() && c.message === message)) {
+    return res.status(409).json({
+      error: lang === 'en' ? 'Message already sent.' : 'Mesazhi është dërguar tashmë.'
+    });
   }
 
-  const subscribers = readSubscribers();
-
-  if (subscribers.some((s) => s.email === email.toLowerCase())) {
-    const err = lang === 'en' ? 'This email is already subscribed' : 'Ky email është tashmë i abonuar';
-    return res.status(409).json({ error: err });
-  }
-
-  subscribers.push({
+  contacts.push({
+    name,
     email: email.toLowerCase(),
-    subscribedAt: new Date().toISOString()
+    phone: phone || '',
+    message,
+    lang: lang || 'sq',
+    date: new Date().toISOString()
   });
+  saveContacts(contacts);
 
-  saveSubscribers(subscribers);
-
-  res.status(201).json({
-    message: ui.toastSubscribeOk,
-    total: subscribers.length
+  res.json({
+    message: lang === 'en'
+      ? 'Thank you! I will contact you within 24 hours.'
+      : 'Faleminderit! Do t\'ju kontaktoj brenda 24 orëve.'
   });
 });
 
@@ -148,7 +105,5 @@ app.get('*', (_req, res) => {
 });
 
 app.listen(PORT, () => {
-  console.log(`\n  ✦ AS NEWS`);
-  console.log(`  Gazeta e Aurora Sallahu`);
-  console.log(`  → http://localhost:${PORT}\n`);
+  console.log(`Arber Mjekiqi Portfolio → http://localhost:${PORT}`);
 });

@@ -1,277 +1,396 @@
 const sq = {
   ui: {
-    tickerLabel: 'Lajme të Fundit',
-    logoTagline: 'Gazeta e Aurora Sallahu',
-    nav: { home: 'Kryefaqja', news: 'Lajme', politics: 'Politikë', economy: 'Ekonomi', culture: 'Kulturë', sport: 'Sport', opinion: 'Opinion', live: 'Live' },
-    heroLoading: 'Duke ngarkuar...',
-    heroAlt: 'Lajme kryesore',
-    authorPrefix: 'Nga',
-    focusTitle: 'Në Fokus',
-    mainNewsTitle: 'Lajmet Kryesore',
-    latestNewsTitle: 'Lajmet e Fundit',
-    seeAllNews: 'Shiko të gjitha →',
-    editorsPickTitle: 'Zgjedhja e Redaksisë',
-    editorsPickSub: 'Artikuj të përzgjedhur me kujdes nga Aurora Sallahu',
-    readArticle: 'Lexo artikullin →',
-    readMore: 'Lexo →',
-    newsTitle: 'Lajmet e Ditës',
+    logoTagline: 'Dizajn i Brendshëm & Laminat',
+    nav: {
+      home: 'Kryefaqja',
+      about: 'Rreth Meje',
+      services: 'Shërbimet',
+      portfolio: 'Projektet',
+      cv: 'CV',
+      contact: 'Kontakt'
+    },
+    tickerLabel: 'Oferta Aktive',
+    heroBadge: 'Dizajner i Certifikuar',
+    heroCta: 'Shiko Projektet',
+    heroCta2: 'Kërko Konsultë Falas',
+    aboutTitle: 'Rreth Meje',
+    aboutSub: 'Passion për hapësira që frymëzojnë',
+    servicesTitle: 'Shërbimet',
+    servicesSub: 'Zgjidhje të plota për shtëpi, biznese dhe hapësira komerciale',
+    portfolioTitle: 'Projektet e Mia',
+    portfolioSub: 'Transformime reale — nga koncepti deri te realizimi',
     filterAll: 'Të Gjitha',
-    loadMore: 'Shfaq më shumë lajme',
-    opinionTitle: 'Opinion & Kolumne',
-    opinionSub: 'Zëra të lirë, ide të guximshme',
-    newsletterTitle: 'Burimi i Ditës',
-    newsletterSub: 'Merr çdo mëngjes përmbledhjen elegante të lajmeve — kurated by AS NEWS.',
-    emailPlaceholder: 'Email adresa juaj',
-    subscribe: 'Abonohu',
-    footerDesc: 'Gazeta digjitale që sjell lajme me elegancë, thellësi dhe integritet — duke ndriçuar çdo ditë me informacion të besueshëm.',
-    footerSections: 'Seksionet',
-    footerAbout: 'Rreth Nesh',
-    footerLegal: 'Ligjore',
-    footerHistory: 'Historia',
-    footerEditorial: 'Redaksia',
-    footerCareers: 'Karriera',
+    cvTitle: 'CV & Eksperienca',
+    cvSub: 'Arsimimi, certifikimet dhe rrugëtimi profesional',
+    eduTitle: 'Arsimimi',
+    expTitle: 'Eksperienca Profesionale',
+    skillsTitle: 'Aftësitë',
+    testimonialsTitle: 'Çfarë Thonë Klientët',
+    testimonialsSub: 'Besimi i klientëve është arritja më e madhe',
+    contactTitle: 'Le të Krijojmë Hapësirën Tënde',
+    contactSub: 'Konsultë falas · Vlerësim në vend · Ofertë brenda 48 orëve',
+    contactName: 'Emri',
+    contactEmail: 'Email',
+    contactPhone: 'Telefoni',
+    contactMessage: 'Përshkruani projektin tuaj...',
+    contactSend: 'Dërgo Mesazhin',
+    contactCall: 'Telefono Tani',
+    footerDesc: 'Dizajner i brendshëm dhe specialist i laminatit me mbi 6 vjet përvojë. Transformoj shtëpi, zyra, dyqane dhe hapësira komerciale me stil, funksionalitet dhe cilësi të lartë.',
+    footerServices: 'Shërbimet',
+    footerLinks: 'Linqe',
     footerContact: 'Kontakt',
-    footerPrivacy: 'Privatësia',
-    footerTerms: 'Kushtet',
-    footerCookies: 'Cookies',
-    footerRights: '© 2026 AS NEWS — Gazeta e Aurora Sallahu. Të gjitha të drejtat e rezervuara.',
-    footerMotto: '"Si aurora, ndriçojmë çdo agim."',
-    searchAria: 'Kërko',
+    footerRights: '© 2026 Arber Mjekiqi — Dizajn i Brendshëm & Laminat. Të gjitha të drejtat e rezervuara.',
+    footerMotto: '"Çdo dysheme tregon një histori — unë e shkruaj me laminat."',
     menuAria: 'Meny',
-    liveBadge: 'LIVE',
-    liveTitle: 'AS NEWS Live',
-    liveSub: 'Transmetim i drejtpërdrejtë — lajme, analiza dhe intervista',
-    liveWatch: 'Shiko Live',
-    liveViewers: 'shikues',
-    liveNow: 'Tani në transmetim',
-    liveUpcoming: 'Programi i ardhshëm',
-    liveOffline: 'Transmetimi fillon së shpejti',
-    liveOfflineSub: 'Qendro me ne — programi live nis në ora 20:00',
-    toastSubscribeOk: 'Faleminderit! Do të merrni Burimin e Ditës çdo mëngjes.',
-    toastSubscribeErr: 'Gabim gjatë abonimit.',
-    toastServerErr: 'Nuk u lidh me serverin. Provo përsëri.',
-    toastLoadErr: 'Gabim gjatë ngarkimit të lajmeve.'
+    toastContactOk: 'Faleminderit! Do t\'ju kontaktoj brenda 24 orëve.',
+    toastContactErr: 'Gabim gjatë dërgimit. Provo përsëri.',
+    toastLoadErr: 'Gabim gjatë ngarkimit.'
   },
 
   ticker: [
-    'Kryeprokurori Isufaj në veri të Kosovës: identifikimi i të gjeturve merr kohë',
-    'KDI i bën thirrje Kurtit të propozojë kandidatin për kryetar të Kuvendit',
-    'Kosova bëhet donator i IDA-s së Bankës Botërore',
-    'Kombëtarja e Kosovës mposht Islandën 3-1 dhe ngjitet në Ligën B'
+    'Konsultë falas për projektin tuaj — rezervo tani',
+    'Laminat premium me garanci 15 vjet',
+    'Instalim profesional brenda 3-5 ditëve',
+    'Dizajn 3D falas për çdo projekt mbi 50m²',
+    'Zbritje 10% për projekte rezidenciale këtë muaj'
   ],
 
-  featured: {
-    id: 'hero-1',
-    category: 'politike',
-    catLabel: 'Kosovë',
-    title: 'Kryeprokurori i Shtetit Isufaj në Zubin Potok: Procesi i identifikimit mund të zgjasë',
-    excerpt: 'Kryeprokurori Albin Isufaj vizitoi verin e Kosovës duke folur për procesin delikat të identifikimit të të gjeturve. Autoritetet theksojnë se çdo hap po bëhet me kujdes maksimal dhe në bashkëpunim me familjarët.',
-    image: 'https://images.unsplash.com/photo-1529107386315-e1a2ed48a620?w=900&q=80',
-    date: '10 Gusht 2026',
-    dateIso: '2026-08-10',
-    time: '17:45',
-    author: 'Aurora Sallahu',
-    readTime: '6 min lexim'
+  profile: {
+    name: 'Arber Mjekiqi',
+    title: 'Dizajner i Brendshëm & Specialist i Laminatit',
+    location: 'Prishtinë, Kosovë',
+    email: 'arber.mjekiqi@email.com',
+    phone: '+383 44 123 456',
+    image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&q=80',
+    bio: 'Jam Arber Mjekiqi, dizajner i brendshëm me specializim në laminat, parket dhe transformimin e hapësirave rezidenciale dhe komerciale. Me mbi 6 vjet përvojë, kam realizuar mbi 120 projekte në Kosovë dhe Shqipëri — nga apartamente moderne deri te zyra korporative, restorante dhe salone bukurie.',
+    bio2: 'Qasja ime kombinon estetikën bashkëkohore me prakticitetin e përditshëm. Çdo projekt fillon me dëgjim — kuptoj nevojat tuaja, buxhetin dhe stilin e dëshiruar, pastaj krijoj një plan 3D para se të prekë asnjë pllakë laminati.',
+    stats: [
+      { value: '120+', label: 'Projekte të Realizuara' },
+      { value: '6+', label: 'Vite Përvojë' },
+      { value: '98%', label: 'Klientë të Kënaqur' },
+      { value: '15', label: 'Vite Garanci Laminat' }
+    ]
   },
 
-  topStories: [
+  services: [
     {
-      id: 'top-1',
-      catLabel: 'Politikë',
-      title: 'KDI thirr Kurtin të propozojë kandidatin për kryetar të Kuvendit',
-      excerpt: 'Instituti Demokratik i Kosovës kërkon vazhdim të dialogut politik dhe propozim të menjëhershëm të emrit për kryetar.',
-      image: 'https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=600&q=80',
-      date: '10 Gusht 2026',
-      time: '16:59'
+      icon: '🏠',
+      title: 'Dizajn Shtëpie',
+      desc: 'Planifikim i plotë i brendshëm — dhomë gjumi, banjo, kuzhinë, dhomë ndenje. Zgjedhje materialesh, ngjyrash dhe mobilimi.'
     },
     {
-      id: 'top-2',
-      catLabel: 'Ekonomi',
-      title: 'Pagat minimale në Kosovë — debati VV vs. opozita vazhdon',
-      excerpt: 'Rrahmani: paga duhet të ishte 450 euro. Murati e quan kundërshtimin e papërgjegjshëm.',
-      image: 'https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=600&q=80',
-      date: '10 Gusht 2026',
-      time: '15:30'
+      icon: '🏢',
+      title: 'Hapësira Biznesi',
+      desc: 'Zyra, dyqane, restorante, klinika. Dizajn që reflekton identitetin e markës dhe rrit produktivitetin.'
+    },
+    {
+      icon: '🪵',
+      title: 'Instalim Laminati',
+      desc: 'Laminat AC4/AC5, SPC, vinil premium. Instalim profesional me teknika të avancuara dhe izolim akustik.'
+    },
+    {
+      icon: '📐',
+      title: 'Vizualizim 3D',
+      desc: 'Para realizimit, shihni saktësisht si do të duket hapësira juaj me render 3D realist.'
+    },
+    {
+      icon: '🔧',
+      title: 'Renovim i Plotë',
+      desc: 'Nga prishja e vjetër deri te finishi final — menaxhim i plotë i projektit pa stres për ju.'
+    },
+    {
+      icon: '💡',
+      title: 'Konsultë & Vlerësim',
+      desc: 'Vizitë falas në vend, matje profesionale dhe ofertë e detajuar brenda 48 orëve.'
     }
   ],
 
-  focus: [
-    { id: 'focus-1', catLabel: 'Sport', title: 'Kosova mposht Islandën 3-1 dhe kalon në Ligën B të Nations League', date: '9 Gusht', time: '22:15', image: 'https://images.unsplash.com/photo-1579952363873-27f3dade9f55?w=400&q=80' },
-    { id: 'focus-2', catLabel: 'Ekonomi', title: 'Kosova bëhet donator i IDA-s — hap të ri në marrëdhëniet me Bankën Botërore', date: '9 Gusht', time: '14:20', image: 'https://images.unsplash.com/photo-1557804506-669a67965ba0?w=400&q=80' },
-    { id: 'focus-3', catLabel: 'Politikë', title: 'Abdixhiku kandidat i LDK-së për president? VV: nuk kemi marrë asnjë emër', date: '8 Gusht', time: '12:00', image: 'https://images.unsplash.com/photo-1523961131990-585ea670c2ce?w=400&q=80' },
-    { id: 'focus-4', catLabel: 'Kulturë', title: 'Ndriçohet objekti i Qeverisë me ngjyrat e flamurit LGBT — reagime të ndryshme', date: '8 Gusht', time: '10:45', image: 'https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?w=400&q=80' }
+  projects: [
+    {
+      id: 1,
+      category: 'shtepi',
+      catLabel: 'Shtëpi',
+      title: 'Vila Moderne — Arbëria, Prishtinë',
+      desc: '180m² laminat oak natural, kuzhinë open-space, 4 dhoma.',
+      image: 'https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?w=800&q=80',
+      area: '180 m²',
+      duration: '12 ditë'
+    },
+    {
+      id: 2,
+      category: 'biznes',
+      catLabel: 'Biznes',
+      title: 'Zyra TechStart — Qendra, Prishtinë',
+      desc: 'Laminat grey concrete look, ndarje open-space, 12 stacione pune.',
+      image: 'https://images.unsplash.com/photo-1497366216548-37526070297c?w=800&q=80',
+      area: '220 m²',
+      duration: '15 ditë'
+    },
+    {
+      id: 3,
+      category: 'shtepi',
+      catLabel: 'Shtëpi',
+      title: 'Apartament Premium — Dragodan',
+      desc: 'Laminat herringbone, banjo walk-in, dhomë ndenje me gips dekorativ.',
+      image: 'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=800&q=80',
+      area: '95 m²',
+      duration: '8 ditë'
+    },
+    {
+      id: 4,
+      category: 'biznes',
+      catLabel: 'Biznes',
+      title: 'Restorant "Aroma" — Pejë',
+      desc: 'Laminat waterproof SPC, ambient rustik-modern, 80 vende.',
+      image: 'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=800&q=80',
+      area: '150 m²',
+      duration: '10 ditë'
+    },
+    {
+      id: 5,
+      category: 'lami',
+      catLabel: 'Laminat',
+      title: 'Salon Bukurie "Elite" — Ferizaj',
+      desc: 'Laminat high-gloss white oak, ndriçim LED, mobilim custom.',
+      image: 'https://images.unsplash.com/photo-1560066984-138dadb4c035?w=800&q=80',
+      area: '65 m²',
+      duration: '5 ditë'
+    },
+    {
+      id: 6,
+      category: 'shtepi',
+      catLabel: 'Shtëpi',
+      title: 'Shtëpi Familjare — Gjilan',
+      desc: 'Renovim i plotë — 3 kate, laminat në çdo dhomë, 280m² total.',
+      image: 'https://images.unsplash.com/photo-1600566753190-17fced7a7440?w=800&q=80',
+      area: '280 m²',
+      duration: '21 ditë'
+    },
+    {
+      id: 7,
+      category: 'lami',
+      catLabel: 'Laminat',
+      title: 'Showroom Mobilje — Prizren',
+      desc: 'Laminat commercial grade AC5, zonë ekspozite 300m².',
+      image: 'https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=800&q=80',
+      area: '300 m²',
+      duration: '14 ditë'
+    },
+    {
+      id: 8,
+      category: 'biznes',
+      catLabel: 'Biznes',
+      title: 'Klinikë Dentare — Mitrovicë',
+      desc: 'Laminat antibacterian, dizajn steril-modern, 8 kabina.',
+      image: 'https://images.unsplash.com/photo-1629909613654-28e377c37b09?w=800&q=80',
+      area: '110 m²',
+      duration: '9 ditë'
+    }
   ],
 
-  editorsPick: [
-    { id: 'pick-1', featured: true, catLabel: 'Analizë', title: 'TVSH-ja në Kosovë më e lartë se në shumë shtete të zhvilluara — çfarë thonë ekspertët', excerpt: 'Analizë e thelluar mbi barrën tatimore dhe ndikimin e saj në bizneset e vogla dhe familjarët kosovarë.', image: 'https://images.unsplash.com/photo-1497366216548-37526070297c?w=700&q=80' },
-    { id: 'pick-2', featured: false, catLabel: 'Veri', title: 'Situata në veri — protesta në Vjenë mbështetje për Kosovën', image: 'https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=400&q=80' },
-    { id: 'pick-3', featured: false, catLabel: 'Opinion', title: 'Kush është presidenti në detyrë sot dhe me çfarë baze?', image: 'https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=400&q=80' }
+  education: [
+    {
+      period: '2022 — 2024',
+      title: 'Master — Dizajn i Brendshëm',
+      place: 'POLIS University, Tiranë',
+      desc: 'Specializim në dizajn hapësinor komercial dhe rezidencial. Tezë: "Ndikimi i materialeve natyrore në psikologjinë e hapësirës së punës".'
+    },
+    {
+      period: '2017 — 2021',
+      title: 'Bachelor — Arkitekturë & Dizajn i Brendshëm',
+      place: 'UBT — Universiteti i Biznesit dhe Teknologjisë, Prishtinë',
+      desc: 'Diplomë me nota të larta. Projekte praktike në AutoCAD, SketchUp, 3ds Max dhe teori të dizajnit.'
+    },
+    {
+      period: '2014 — 2017',
+      title: 'Shkolla e Mesme e Artit',
+      place: 'SHMUA "Jordan Misja", Tiranë',
+      desc: 'Drejtimi i Artit Figurativ dhe Dizajnit. Baza kreative për punën profesionale.'
+    }
   ],
 
-  opinions: [
-    { id: 'op-1', initials: 'AS', quote: 'Gazetaria nuk është vetëm informim — është dritë që ndriçon rrugën drejt të vërtetës.', cite: 'Aurora Sallahu, Themeluese' },
-    { id: 'op-2', initials: 'MK', quote: 'Demokracia lulëzon aty ku qytetarët lexojnë, pyesin dhe mendojnë kritikisht.', cite: 'Dr. Mira Krasniqi, Analiste Politike' },
-    { id: 'op-3', initials: 'AG', quote: 'Në Kosovë, TVSH-ja më e lartë se në shtetet e zhvilluara — duhet reformë e mençur.', cite: 'Ardian Gjini, Ekonomist' }
+  experience: [
+    {
+      period: '2021 — Sot',
+      title: 'Themelues & Dizajner Kryesor',
+      place: 'AM Interior & Laminat — Prishtinë',
+      desc: 'Menaxhim i 120+ projekteve. Ekip 8 instaluesish. Partneritet me furnizues premium european (Kronotex, Quick-Step, Egger).'
+    },
+    {
+      period: '2019 — 2021',
+      title: 'Dizajner i Brendshëm & Instalues Laminati',
+      place: 'FloorDesign KS — Prishtinë',
+      desc: 'Instalim laminat në projekte rezidenciale dhe komerciale. Vizualizim 3D për klientët. 45+ projekte të përfunduara.'
+    },
+    {
+      period: '2017 — 2019',
+      title: 'Praktikant & Asistent Dizajni',
+      place: 'Studio Arhitektura "Linea" — Tiranë',
+      desc: 'Mbështetje në projekte dizajni, matje në terren, prezantime për klientë. Mësova menaxhimin e projektit nga koncepti deri te dorëzimi.'
+    }
   ],
 
-  news: [
-    { id: 1, category: 'politike', catLabel: 'Kosovë', title: 'Kryeprokurori Isufaj në Zubin Potok: procesi mund të zgjasë', excerpt: 'Vizita në veri thekson nevojën për durim në procesin e identifikimit dhe bashkëpunim me familjarët.', image: 'https://images.unsplash.com/photo-1529107386315-e1a2ed48a620?w=600&q=80', date: '10 Gusht 2026', time: '17:45', author: 'Aurora Sallahu', readTime: '6 min' },
-    { id: 2, category: 'politike', catLabel: 'Politikë', title: 'KDI thirr Kurtin të propozojë kandidatin për kryetar të Kuvendit', excerpt: 'Instituti Demokratik kërkon vazhdim të dialogut dhe propozim të menjëhershëm të emrit.', image: 'https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=600&q=80', date: '10 Gusht 2026', time: '16:59', author: 'Arben Hoxha', readTime: '5 min' },
-    { id: 3, category: 'ekonomi', catLabel: 'Ekonomi', title: 'VV: paga minimale duhet të ishte 450 euro — debati intensifikohet', excerpt: 'Rrahmani dhe Murati shkëmbejnë akuza në Kuvend rreth politikës së pagave.', image: 'https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=600&q=80', date: '10 Gusht 2026', time: '15:30', author: 'Elira Leka', readTime: '4 min' },
-    { id: 4, category: 'sport', catLabel: 'Sport', title: 'Kosova mposht Islandën 3-1 — kalon në Ligën B', excerpt: 'Kombëtarja shënon fitore historike dhe siguron ngjitje në Nations League.', image: 'https://images.unsplash.com/photo-1579952363873-27f3dade9f55?w=600&q=80', date: '9 Gusht 2026', time: '22:15', author: 'Genti Rama', readTime: '3 min' },
-    { id: 5, category: 'ekonomi', catLabel: 'Ekonomi', title: 'Kosova bëhet donator i IDA-s së Bankës Botërore', excerpt: 'Hap i rëndësishëm në marrëdhëniet ekonomike ndërkombëtare të vendit.', image: 'https://images.unsplash.com/photo-1557804506-669a67965ba0?w=600&q=80', date: '9 Gusht 2026', time: '14:20', author: 'Mira Krasniqi', readTime: '5 min' },
-    { id: 6, category: 'politike', catLabel: 'Politikë', title: 'Abdixhiku kandidat i LDK-së për president?', excerpt: 'VV në Pressing: nuk kemi marrë asnjë emër zyrtar nga opozita.', image: 'https://images.unsplash.com/photo-1523961131990-585ea670c2ce?w=600&q=80', date: '8 Gusht 2026', time: '12:00', author: 'Aurora Sallahu', readTime: '4 min' },
-    { id: 7, category: 'kulture', catLabel: 'Kulturë', title: 'Objekti i Qeverisë ndriçohet me ngjyrat e flamurit LGBT', excerpt: 'Veprim simbolik që shkakton reagime të ndryshme në opinionin publik.', image: 'https://images.unsplash.com/photo-1460661414781-efabcd8835c1?w=600&q=80', date: '8 Gusht 2026', time: '10:45', author: 'Drita Shehu', readTime: '3 min' },
-    { id: 8, category: 'politike', catLabel: 'Rajon', title: 'Sudani njeh zyrtarisht Kosovën si shtet të pavarur', excerpt: 'Një tjetër hap diplomatik për Kosovën në skenën ndërkombëtare.', image: 'https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=600&q=80', date: '7 Gusht 2026', time: '09:30', author: 'Arben Hoxha', readTime: '4 min' },
-    { id: 9, category: 'sport', catLabel: 'Sport', title: '18 vjet nga raporti i Ahtisaarit për pavarësinë e Kosovës', excerpt: 'Kujtim për ditën historike kur u dorëzua raporti që çoi në pavarësi.', image: 'https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=600&q=80', date: '7 Gusht 2026', time: '08:00', author: 'Anila Berisha', readTime: '5 min' },
-    { id: 10, category: 'politike', catLabel: 'Veri', title: 'Protesta në Vjenë mbështetje për Kosovën dhe situatën në veri', excerpt: 'Qindra persona mblidhen para ambasadës duke kërkuar mbështetje ndërkombëtare.', image: 'https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=600&q=80', date: '6 Gusht 2026', time: '18:00', author: 'Aurora Sallahu', readTime: '4 min' }
+  skills: [
+    'Laminat AC4/AC5 & SPC',
+    'Parket natyral & vinil',
+    'AutoCAD & SketchUp',
+    'Vizualizim 3D',
+    'Dizajn kuzhine & banjo',
+    'Menaxhim projektesh',
+    'Izolim akustik & hidro',
+    'Mobilim & dekor'
+  ],
+
+  certifications: [
+    'Certifikim Quick-Step Master Installer (2023)',
+    'Kurs Advanced Interior Design — Domestika (2022)',
+    'Certifikim Egger Pro Flooring (2021)',
+    'Trajnim 3ds Max & V-Ray — UBT (2020)'
+  ],
+
+  testimonials: [
+    {
+      initials: 'BL',
+      quote: 'Arberi transformoi plotësisht apartamentin tonë. Laminati oak që zgjodhi është mahnitës — dhe instalimi perfekt pa asnjë hapësirë.',
+      cite: 'Blerta L., Prishtinë — Apartament 95m²'
+    },
+    {
+      initials: 'AK',
+      quote: 'Për zyrën tonë kishim nevojë për diçka profesionale por të ngrohtë. Arberi na dha vizualizim 3D para punës dhe rezultati tejkaloi pritshmëritë.',
+      cite: 'Ardian K., TechStart — Zyrë 220m²'
+    },
+    {
+      initials: 'SM',
+      quote: 'Salonin e bukurisë e hapem me buxhet të kufizuar. Arberi gjeti zgjidhje laminati premium me çmim të arsyeshëm. Klientët komplimentojnë dyshemenë!',
+      cite: 'Sara M., Ferizaj — Salon Elite'
+    }
   ]
 };
 
 const en = {
   ui: {
-    tickerLabel: 'Breaking News',
-    logoTagline: 'Aurora Sallahu\'s Newspaper',
-    nav: { home: 'Home', news: 'News', politics: 'Politics', economy: 'Economy', culture: 'Culture', sport: 'Sport', opinion: 'Opinion', live: 'Live' },
-    heroLoading: 'Loading...',
-    heroAlt: 'Top story',
-    authorPrefix: 'By',
-    focusTitle: 'In Focus',
-    mainNewsTitle: 'Top Stories',
-    latestNewsTitle: 'Latest News',
-    seeAllNews: 'See all →',
-    editorsPickTitle: 'Editor\'s Pick',
-    editorsPickSub: 'Handpicked articles by Aurora Sallahu',
-    readArticle: 'Read article →',
-    readMore: 'Read →',
-    newsTitle: 'Today\'s News',
+    logoTagline: 'Interior Design & Flooring',
+    nav: {
+      home: 'Home',
+      about: 'About',
+      services: 'Services',
+      portfolio: 'Projects',
+      cv: 'CV',
+      contact: 'Contact'
+    },
+    tickerLabel: 'Active Offers',
+    heroBadge: 'Certified Designer',
+    heroCta: 'View Projects',
+    heroCta2: 'Free Consultation',
+    aboutTitle: 'About Me',
+    aboutSub: 'Passion for spaces that inspire',
+    servicesTitle: 'Services',
+    servicesSub: 'Complete solutions for homes, businesses and commercial spaces',
+    portfolioTitle: 'My Projects',
+    portfolioSub: 'Real transformations — from concept to completion',
     filterAll: 'All',
-    loadMore: 'Show more news',
-    opinionTitle: 'Opinion & Columns',
-    opinionSub: 'Free voices, bold ideas',
-    newsletterTitle: 'Daily Brief',
-    newsletterSub: 'Get an elegant morning roundup of the news — curated by AS NEWS.',
-    emailPlaceholder: 'Your email address',
-    subscribe: 'Subscribe',
-    footerDesc: 'A digital newspaper delivering news with elegance, depth and integrity — illuminating every day with trusted information.',
-    footerSections: 'Sections',
-    footerAbout: 'About Us',
-    footerLegal: 'Legal',
-    footerHistory: 'History',
-    footerEditorial: 'Editorial',
-    footerCareers: 'Careers',
+    cvTitle: 'CV & Experience',
+    cvSub: 'Education, certifications and professional journey',
+    eduTitle: 'Education',
+    expTitle: 'Professional Experience',
+    skillsTitle: 'Skills',
+    testimonialsTitle: 'What Clients Say',
+    testimonialsSub: 'Client trust is the greatest achievement',
+    contactTitle: 'Let\'s Create Your Space',
+    contactSub: 'Free consultation · On-site assessment · Quote within 48 hours',
+    contactName: 'Name',
+    contactEmail: 'Email',
+    contactPhone: 'Phone',
+    contactMessage: 'Describe your project...',
+    contactSend: 'Send Message',
+    contactCall: 'Call Now',
+    footerDesc: 'Interior designer and laminate flooring specialist with 6+ years of experience. I transform homes, offices, shops and commercial spaces with style, functionality and premium quality.',
+    footerServices: 'Services',
+    footerLinks: 'Links',
     footerContact: 'Contact',
-    footerPrivacy: 'Privacy',
-    footerTerms: 'Terms',
-    footerCookies: 'Cookies',
-    footerRights: '© 2026 AS NEWS — Aurora Sallahu\'s Newspaper. All rights reserved.',
-    footerMotto: '"Like the aurora, we illuminate every dawn."',
-    searchAria: 'Search',
+    footerRights: '© 2026 Arber Mjekiqi — Interior Design & Flooring. All rights reserved.',
+    footerMotto: '"Every floor tells a story — I write it with laminate."',
     menuAria: 'Menu',
-    liveBadge: 'LIVE',
-    liveTitle: 'AS NEWS Live',
-    liveSub: 'Live broadcast — news, analysis and interviews',
-    liveWatch: 'Watch Live',
-    liveViewers: 'viewers',
-    liveNow: 'Now broadcasting',
-    liveUpcoming: 'Upcoming schedule',
-    liveOffline: 'Broadcast starting soon',
-    liveOfflineSub: 'Stay with us — live program starts at 8:00 PM',
-    toastSubscribeOk: 'Thank you! You will receive the Daily Brief every morning.',
-    toastSubscribeErr: 'Subscription error.',
-    toastServerErr: 'Could not connect to server. Please try again.',
-    toastLoadErr: 'Error loading news.'
+    toastContactOk: 'Thank you! I will contact you within 24 hours.',
+    toastContactErr: 'Error sending message. Please try again.',
+    toastLoadErr: 'Loading error.'
   },
 
   ticker: [
-    'Chief Prosecutor Isufaj in northern Kosovo: identification process may take time',
-    'KDI calls on Kurti to propose candidate for Assembly Speaker',
-    'Kosovo becomes IDA donor to the World Bank',
-    'Kosovo national team beats Iceland 3-1 and advances to League B'
+    'Free consultation for your project — book now',
+    'Premium laminate with 15-year warranty',
+    'Professional installation within 3-5 days',
+    'Free 3D design for projects over 50m²',
+    '10% discount on residential projects this month'
   ],
 
-  featured: {
-    id: 'hero-1',
-    category: 'politike',
-    catLabel: 'Kosovo',
-    title: 'Chief Prosecutor Isufaj in Zubin Potok: Identification process may take time',
-    excerpt: 'Chief Prosecutor Albin Isufaj visited northern Kosovo to discuss the delicate process of identifying the deceased. Authorities emphasize every step is being taken with maximum care and in cooperation with families.',
-    image: 'https://images.unsplash.com/photo-1529107386315-e1a2ed48a620?w=900&q=80',
-    date: 'August 10, 2026',
-    dateIso: '2026-08-10',
-    time: '17:45',
-    author: 'Aurora Sallahu',
-    readTime: '6 min read'
+  profile: {
+    name: 'Arber Mjekiqi',
+    title: 'Interior Designer & Laminate Specialist',
+    location: 'Pristina, Kosovo',
+    email: 'arber.mjekiqi@email.com',
+    phone: '+383 44 123 456',
+    image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&q=80',
+    bio: 'I am Arber Mjekiqi, an interior designer specializing in laminate, parquet and transforming residential and commercial spaces. With 6+ years of experience, I have completed 120+ projects across Kosovo and Albania — from modern apartments to corporate offices, restaurants and beauty salons.',
+    bio2: 'My approach combines contemporary aesthetics with everyday practicality. Every project starts with listening — I understand your needs, budget and desired style, then create a 3D plan before touching a single laminate plank.',
+    stats: [
+      { value: '120+', label: 'Completed Projects' },
+      { value: '6+', label: 'Years Experience' },
+      { value: '98%', label: 'Satisfied Clients' },
+      { value: '15', label: 'Year Laminate Warranty' }
+    ]
   },
 
-  topStories: [
-    {
-      id: 'top-1',
-      catLabel: 'Politics',
-      title: 'KDI calls on Kurti to propose candidate for Assembly Speaker',
-      excerpt: 'The Kosovo Democratic Institute calls for continued political dialogue and an immediate nomination.',
-      image: 'https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=600&q=80',
-      date: 'August 10, 2026',
-      time: '16:59'
-    },
-    {
-      id: 'top-2',
-      catLabel: 'Economy',
-      title: 'Minimum wage in Kosovo — VV vs opposition debate continues',
-      excerpt: 'Rrahmani: wage should have been €450. Murati calls the objection reckless.',
-      image: 'https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=600&q=80',
-      date: 'August 10, 2026',
-      time: '15:30'
-    }
+  services: [
+    { icon: '🏠', title: 'Home Design', desc: 'Full interior planning — bedroom, bathroom, kitchen, living room. Material, color and furniture selection.' },
+    { icon: '🏢', title: 'Business Spaces', desc: 'Offices, shops, restaurants, clinics. Design that reflects brand identity and boosts productivity.' },
+    { icon: '🪵', title: 'Laminate Installation', desc: 'AC4/AC5 laminate, SPC, premium vinyl. Professional installation with advanced techniques and acoustic insulation.' },
+    { icon: '📐', title: '3D Visualization', desc: 'Before execution, see exactly how your space will look with realistic 3D renders.' },
+    { icon: '🔧', title: 'Full Renovation', desc: 'From demolition to final finish — complete project management without stress for you.' },
+    { icon: '💡', title: 'Consultation & Assessment', desc: 'Free on-site visit, professional measurements and detailed quote within 48 hours.' }
   ],
 
-  focus: [
-    { id: 'focus-1', catLabel: 'Sport', title: 'Kosovo beats Iceland 3-1 and advances to Nations League B', date: 'Aug 9', time: '22:15', image: 'https://images.unsplash.com/photo-1579952363873-27f3dade9f55?w=400&q=80' },
-    { id: 'focus-2', catLabel: 'Economy', title: 'Kosovo becomes IDA donor — new chapter with World Bank', date: 'Aug 9', time: '14:20', image: 'https://images.unsplash.com/photo-1557804506-669a67965ba0?w=400&q=80' },
-    { id: 'focus-3', catLabel: 'Politics', title: 'Abdixhiku LDK presidential candidate? VV: we haven\'t received any name', date: 'Aug 8', time: '12:00', image: 'https://images.unsplash.com/photo-1523961131990-585ea670c2ce?w=400&q=80' },
-    { id: 'focus-4', catLabel: 'Culture', title: 'Government building lit with LGBT rainbow flag colours', date: 'Aug 8', time: '10:45', image: 'https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?w=400&q=80' }
+  projects: sq.projects.map((p) => ({
+    ...p,
+    catLabel: p.category === 'shtepi' ? 'Home' : p.category === 'biznes' ? 'Business' : 'Laminate',
+    title: p.title,
+    desc: p.desc
+  })),
+
+  education: [
+    { period: '2022 — 2024', title: 'Master — Interior Design', place: 'POLIS University, Tirana', desc: 'Specialization in commercial and residential spatial design. Thesis: "Impact of natural materials on workplace space psychology".' },
+    { period: '2017 — 2021', title: 'Bachelor — Architecture & Interior Design', place: 'UBT — University of Business and Technology, Pristina', desc: 'High honors degree. Practical projects in AutoCAD, SketchUp, 3ds Max and design theory.' },
+    { period: '2014 — 2017', title: 'High School of Art', place: 'Art High School "Jordan Misja", Tirana', desc: 'Figurative Art and Design track. Creative foundation for professional work.' }
   ],
 
-  editorsPick: [
-    { id: 'pick-1', featured: true, catLabel: 'Analysis', title: 'VAT in Kosovo higher than many developed states — what experts say', excerpt: 'An in-depth look at the tax burden and its impact on small businesses and Kosovo families.', image: 'https://images.unsplash.com/photo-1497366216548-37526070297c?w=700&q=80' },
-    { id: 'pick-2', featured: false, catLabel: 'North', title: 'Northern situation — Vienna protests in support of Kosovo', image: 'https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=400&q=80' },
-    { id: 'pick-3', featured: false, catLabel: 'Opinion', title: 'Who is the acting president today and on what basis?', image: 'https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=400&q=80' }
+  experience: [
+    { period: '2021 — Present', title: 'Founder & Lead Designer', place: 'AM Interior & Laminate — Pristina', desc: 'Management of 120+ projects. Team of 8 installers. Partnership with premium European suppliers (Kronotex, Quick-Step, Egger).' },
+    { period: '2019 — 2021', title: 'Interior Designer & Laminate Installer', place: 'FloorDesign KS — Pristina', desc: 'Laminate installation in residential and commercial projects. 3D visualization for clients. 45+ completed projects.' },
+    { period: '2017 — 2019', title: 'Intern & Design Assistant', place: 'Architecture Studio "Linea" — Tirana', desc: 'Support in design projects, on-site measurements, client presentations. Learned project management from concept to delivery.' }
   ],
 
-  opinions: [
-    { id: 'op-1', initials: 'AS', quote: 'Journalism is not just information — it is light illuminating the path to truth.', cite: 'Aurora Sallahu, Founder' },
-    { id: 'op-2', initials: 'MK', quote: 'Democracy flourishes where citizens read, question and think critically.', cite: 'Dr. Mira Krasniqi, Political Analyst' },
-    { id: 'op-3', initials: 'AG', quote: 'In Kosovo, VAT is higher than in developed states — smart reform is needed.', cite: 'Ardian Gjini, Economist' }
+  skills: [
+    'AC4/AC5 & SPC Laminate',
+    'Natural Parquet & Vinyl',
+    'AutoCAD & SketchUp',
+    '3D Visualization',
+    'Kitchen & Bathroom Design',
+    'Project Management',
+    'Acoustic & Hydro Insulation',
+    'Furniture & Decor'
   ],
 
-  news: [
-    { id: 1, category: 'politike', catLabel: 'Kosovo', title: 'Chief Prosecutor Isufaj in Zubin Potok: process may take time', excerpt: 'Northern visit emphasizes need for patience in identification process and cooperation with families.', image: 'https://images.unsplash.com/photo-1529107386315-e1a2ed48a620?w=600&q=80', date: 'August 10, 2026', time: '17:45', author: 'Aurora Sallahu', readTime: '6 min' },
-    { id: 2, category: 'politike', catLabel: 'Politics', title: 'KDI calls on Kurti to propose Assembly Speaker candidate', excerpt: 'Democratic Institute calls for continued dialogue and immediate nomination.', image: 'https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=600&q=80', date: 'August 10, 2026', time: '16:59', author: 'Arben Hoxha', readTime: '5 min' },
-    { id: 3, category: 'ekonomi', catLabel: 'Economy', title: 'VV: minimum wage should have been €450 — debate intensifies', excerpt: 'Rrahmani and Murati exchange accusations in Assembly over wage policy.', image: 'https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=600&q=80', date: 'August 10, 2026', time: '15:30', author: 'Elira Leka', readTime: '4 min' },
-    { id: 4, category: 'sport', catLabel: 'Sport', title: 'Kosovo beats Iceland 3-1 — advances to League B', excerpt: 'National team records historic victory and secures Nations League promotion.', image: 'https://images.unsplash.com/photo-1579952363873-27f3dade9f55?w=600&q=80', date: 'August 9, 2026', time: '22:15', author: 'Genti Rama', readTime: '3 min' },
-    { id: 5, category: 'ekonomi', catLabel: 'Economy', title: 'Kosovo becomes World Bank IDA donor', excerpt: 'Important step in the country\'s international economic relations.', image: 'https://images.unsplash.com/photo-1557804506-669a67965ba0?w=600&q=80', date: 'August 9, 2026', time: '14:20', author: 'Mira Krasniqi', readTime: '5 min' },
-    { id: 6, category: 'politike', catLabel: 'Politics', title: 'Abdixhiku LDK presidential candidate?', excerpt: 'VV at Pressing: we have not received any official name from opposition.', image: 'https://images.unsplash.com/photo-1523961131990-585ea670c2ce?w=600&q=80', date: 'August 8, 2026', time: '12:00', author: 'Aurora Sallahu', readTime: '4 min' },
-    { id: 7, category: 'kulture', catLabel: 'Culture', title: 'Government building lit with LGBT rainbow flag colours', excerpt: 'Symbolic act that draws mixed reactions from the public.', image: 'https://images.unsplash.com/photo-1460661414781-efabcd8835c1?w=600&q=80', date: 'August 8, 2026', time: '10:45', author: 'Drita Shehu', readTime: '3 min' },
-    { id: 8, category: 'politike', catLabel: 'Region', title: 'Sudan officially recognizes independent Kosovo', excerpt: 'Another diplomatic step for Kosovo on the international stage.', image: 'https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=600&q=80', date: 'August 7, 2026', time: '09:30', author: 'Arben Hoxha', readTime: '4 min' },
-    { id: 9, category: 'sport', catLabel: 'Sport', title: '18 years since Ahtisaari report on Kosovo independence', excerpt: 'Remembering the historic day when the report leading to independence was submitted.', image: 'https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=600&q=80', date: 'August 7, 2026', time: '08:00', author: 'Anila Berisha', readTime: '5 min' },
-    { id: 10, category: 'politike', catLabel: 'North', title: 'Vienna protests in support of Kosovo and northern situation', excerpt: 'Hundreds gather demanding international support for Kosovo.', image: 'https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=600&q=80', date: 'August 6, 2026', time: '18:00', author: 'Aurora Sallahu', readTime: '4 min' }
-  ]
-};
+  certifications: [
+    'Quick-Step Master Installer Certification (2023)',
+    'Advanced Interior Design Course — Domestika (2022)',
+    'Egger Pro Flooring Certification (2021)',
+    '3ds Max & V-Ray Training — UBT (2020)'
+  ],
 
-const live = {
-  isLive: true,
-  streamUrl: 'https://www.youtube.com/embed/21X5lGlDOfg?autoplay=0&mute=1',
-  poster: 'https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=1200&q=80',
-  viewers: 1847,
-  currentShow: {
-    sq: 'Lajmet e Mbrëmjes — AS NEWS',
-    en: 'Evening News — AS NEWS'
-  },
-  schedule: [
-    { time: '08:00', title: { sq: 'Agimi — Lajmet e Mëngjesit', en: 'Dawn — Morning News' } },
-    { time: '14:00', title: { sq: 'Fokus Ekonomik', en: 'Economic Focus' } },
-    { time: '20:00', title: { sq: 'Lajmet e Mbrëmjes', en: 'Evening News' } },
-    { time: '22:30', title: { sq: 'Opinion Live', en: 'Opinion Live' } }
+  testimonials: [
+    { initials: 'BL', quote: 'Arber completely transformed our apartment. The oak laminate he chose is stunning — and the installation is perfect with no gaps.', cite: 'Blerta L., Pristina — 95m² Apartment' },
+    { initials: 'AK', quote: 'For our office we needed something professional yet warm. Arber gave us 3D visualization before work and the result exceeded expectations.', cite: 'Ardian K., TechStart — 220m² Office' },
+    { initials: 'SM', quote: 'We opened the beauty salon on a limited budget. Arber found premium laminate solutions at a reasonable price. Clients compliment the floor!', cite: 'Sara M., Ferizaj — Elite Salon' }
   ]
 };
 
@@ -283,4 +402,4 @@ function resolveLang(lang) {
   return lang === 'en' ? 'en' : 'sq';
 }
 
-module.exports = { getLocale, resolveLang, live, supportedLangs: ['sq', 'en'] };
+module.exports = { getLocale, resolveLang, supportedLangs: ['sq', 'en'] };

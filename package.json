@@ -1,7 +1,7 @@
 {
-  "name": "as-news",
-  "version": "1.0.0",
-  "description": "AS NEWS — Gazeta digjitale e Aurora Sallahu",
+  "name": "arber-mjekiqi",
+  "version": "2.0.0",
+  "description": "Arber Mjekiqi — Dizajn i Brendshëm & Laminat Portfolio",
   "main": "server.js",
   "engines": {
     "node": ">=18"
