@@ -3,273 +3,310 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <meta name="description" content="Arber Mjekiqi — Dizajner i Brendshëm & Specialist i Laminatit. Shtëpi, biznese, laminat premium. Prishtinë, Kosovë.">
-  <title>Arber Mjekiqi | Dizajn i Brendshëm & Laminat</title>
+  <meta name="description" content="AS NEWS — Gazeta digjitale e Aurora Sallahu. Lajme, analiza dhe reportazhe me stil.">
+  <title>AS NEWS | Gazeta Digjitale</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+  <!-- Live broadcast background (video + slideshow foto) -->
   <div class="page-bg" aria-hidden="true">
     <div class="page-bg-slideshow" id="pageBgSlideshow"></div>
+    <video
+      class="page-bg-video"
+      id="pageBgVideo"
+      autoplay
+      muted
+      loop
+      playsinline
+      preload="metadata"
+      poster="https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?w=1920&q=80"
+    >
+      <source src="https://videos.pexels.com/video-files/7578612/7578612-sd_640_360_30fps.mp4" type="video/mp4" media="(max-width: 768px)">
+      <source src="https://videos.pexels.com/video-files/7578612/7578612-hd_1920_1080_30fps.mp4" type="video/mp4">
+    </video>
+    <div class="page-bg-image page-bg-fallback"></div>
+    <div class="page-bg-mesh"></div>
     <div class="page-bg-overlay"></div>
     <div class="page-bg-glow page-bg-glow-1"></div>
     <div class="page-bg-glow page-bg-glow-2"></div>
+    <div class="page-bg-glow page-bg-glow-3"></div>
+    <div class="page-bg-glow page-bg-glow-4"></div>
+    <div class="page-bg-particles" aria-hidden="true"></div>
+    <div class="page-bg-grain"></div>
   </div>
 
   <div class="page-content">
-    <!-- Ticker -->
-    <div class="ticker-bar">
-      <span class="ticker-label" id="tickerLabel">Oferta</span>
-      <div class="ticker-wrap">
-        <div class="ticker-content" id="tickerContent"></div>
+  <!-- Breaking News Ticker -->
+  <div class="ticker-bar">
+    <span class="ticker-label" id="tickerLabel">Lajme të Fundit</span>
+    <div class="ticker-wrap">
+      <div class="ticker-content" id="tickerContent">
+        <!-- Populated by API -->
       </div>
     </div>
+  </div>
 
-    <!-- Header -->
-    <header class="header header-animate">
-      <div class="container header-inner">
-        <a href="#" class="logo">
-          <span class="logo-icon">AM</span>
-          <div class="logo-text">
-            <span class="logo-name">Arber Mjekiqi</span>
-            <span class="logo-tagline" id="logoTagline">Dizajn & Laminat</span>
-          </div>
-        </a>
-        <nav class="nav" id="mainNav">
-          <a href="#" class="nav-link active" data-i18n="nav.home">Kryefaqja</a>
-          <a href="#rreth" class="nav-link" data-i18n="nav.about">Rreth Meje</a>
-          <a href="#sherbime" class="nav-link" data-i18n="nav.services">Shërbimet</a>
-          <a href="#projekte" class="nav-link" data-i18n="nav.portfolio">Projektet</a>
-          <a href="#cv" class="nav-link" data-i18n="nav.cv">CV</a>
-          <a href="#kontakt" class="nav-link" data-i18n="nav.contact">Kontakt</a>
-        </nav>
-        <div class="header-actions">
-          <div class="lang-switch">
-            <button class="lang-btn active" data-lang="sq">SQ</button>
-            <button class="lang-btn" data-lang="en">EN</button>
-          </div>
-          <a href="#kontakt" class="btn-header" id="headerCta">Konsultë Falas</a>
-          <button class="menu-toggle" id="menuToggle" aria-label="Meny">
-            <span></span><span></span><span></span>
-          </button>
+  <!-- Header -->
+  <header class="header header-animate">
+    <div class="container header-inner">
+      <a href="#" class="logo">
+        <span class="logo-icon">✦</span>
+        <div class="logo-text">
+          <span class="logo-name">AS NEWS</span>
+          <span class="logo-tagline" id="logoTagline">Gazeta e Aurora Sallahu</span>
         </div>
+      </a>
+
+      <nav class="nav" id="mainNav">
+        <a href="#" class="nav-link active" data-i18n="nav.home">Kryefaqja</a>
+        <a href="#live" class="nav-link" data-i18n="nav.live">Live</a>
+        <a href="#lajme" class="nav-link" data-i18n="nav.news">Lajme</a>
+        <a href="#lajme" class="nav-link" data-i18n="nav.politics">Politikë</a>
+        <a href="#lajme" class="nav-link" data-i18n="nav.economy">Ekonomi</a>
+        <a href="#lajme" class="nav-link" data-i18n="nav.culture">Kulturë</a>
+        <a href="#lajme" class="nav-link" data-i18n="nav.sport">Sport</a>
+        <a href="#opinion" class="nav-link" data-i18n="nav.opinion">Opinion</a>
+      </nav>
+
+      <div class="header-actions">
+        <div class="lang-switch" id="langSwitch">
+          <button class="lang-btn active" data-lang="sq" aria-label="Shqip">SQ</button>
+          <button class="lang-btn" data-lang="en" aria-label="English">EN</button>
+        </div>
+        <button class="search-btn" id="searchBtn" aria-label="Kërko">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
+          </svg>
+        </button>
+        <button class="menu-toggle" id="menuToggle" aria-label="Meny">
+          <span></span><span></span><span></span>
+        </button>
       </div>
-    </header>
+    </div>
+  </header>
 
-    <!-- Hero -->
-    <section class="hero reveal" id="hero">
-      <div class="container hero-grid">
-        <div class="hero-text">
-          <span class="hero-badge" id="heroBadge">Dizajner i Certifikuar</span>
-          <h1 id="heroName">Arber Mjekiqi</h1>
-          <p class="hero-title" id="heroTitle">Dizajner i Brendshëm & Specialist i Laminatit</p>
-          <p class="hero-bio" id="heroBio"></p>
-          <div class="hero-stats" id="heroStats"></div>
-          <div class="hero-actions">
-            <a href="#projekte" class="btn-primary" id="heroCta">Shiko Projektet</a>
-            <a href="#kontakt" class="btn-outline" id="heroCta2">Kërko Konsultë Falas</a>
-          </div>
-        </div>
-        <div class="hero-image-wrap">
-          <div class="hero-image-frame">
-            <img id="heroImage" src="" alt="Arber Mjekiqi">
-          </div>
-          <div class="hero-float-card">
-            <span class="float-num">120+</span>
-            <span class="float-label">Projekte</span>
-          </div>
-        </div>
+  <!-- Lajmet Kryesore + Lajmet e Fundit (Gazeta Express style) -->
+  <section class="top-news-section reveal reveal-blur" id="kryesore">
+    <div class="container">
+      <div class="top-news-header">
+        <h2 class="section-label" id="mainNewsTitle">Lajmet Kryesore</h2>
+        <a href="#lajme" class="see-all-link" id="seeAllNews">Shiko të gjitha →</a>
       </div>
-    </section>
 
-    <!-- About -->
-    <section class="about-section reveal" id="rreth">
-      <div class="container">
-        <div class="section-header">
-          <h2 id="aboutTitle">Rreth Meje</h2>
-          <p id="aboutSub">Passion për hapësira që frymëzojnë</p>
-        </div>
-        <div class="about-grid">
-          <div class="about-image">
-            <img id="aboutImage" src="" alt="">
+      <div class="top-news-grid">
+        <article class="top-main" id="heroMain">
+          <div class="top-main-image">
+            <img id="heroImage" src="" alt="Lajme kryesore">
+            <span class="category-badge" id="heroCategory">...</span>
           </div>
-          <div class="about-content">
-            <p id="aboutBio1"></p>
-            <p id="aboutBio2"></p>
-            <div class="about-contact">
-              <div class="contact-chip">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-                <span id="aboutLocation"></span>
-              </div>
-              <div class="contact-chip">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-                <span id="aboutPhone"></span>
-              </div>
-              <div class="contact-chip">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-                <span id="aboutEmail"></span>
-              </div>
+          <div class="top-main-body">
+            <div class="top-meta">
+              <time id="heroDate" datetime="">...</time>
+              <span class="top-time" id="heroTime"></span>
+            </div>
+            <h1 id="heroTitle">Duke ngarkuar...</h1>
+            <p id="heroExcerpt"></p>
+            <div class="article-meta">
+              <span class="author" id="heroAuthor"></span>
+              <span class="read-time" id="heroReadTime"></span>
             </div>
           </div>
+        </article>
+
+        <div class="top-secondary" id="topStoriesGrid"></div>
+
+        <aside class="latest-sidebar">
+          <h3 class="latest-title" id="latestNewsTitle">Lajmet e Fundit</h3>
+          <ul class="latest-list" id="latestNewsList"></ul>
+        </aside>
+      </div>
+
+      <div class="top-news-row" id="topNewsRow"></div>
+    </div>
+  </section>
+
+  <!-- Live Broadcast -->
+  <section class="live-section reveal reveal-live" id="live">
+    <div class="live-bg" aria-hidden="true"></div>
+    <div class="container">
+      <div class="live-header">
+        <div class="live-header-text">
+          <span class="live-badge" id="liveBadge">
+            <span class="live-dot"></span>
+            <span id="liveBadgeText">LIVE</span>
+          </span>
+          <h2 id="liveTitle">AS NEWS Live</h2>
+          <p id="liveSub">Transmetim i drejtpërdrejtë — lajme, analiza dhe intervista</p>
+        </div>
+        <div class="live-viewers" id="liveViewers">
+          <span class="viewers-count">—</span>
+          <span class="viewers-label">shikues</span>
         </div>
       </div>
-    </section>
 
-    <!-- Services -->
-    <section class="services-section reveal" id="sherbime">
-      <div class="container">
-        <div class="section-header center">
-          <h2 id="servicesTitle">Shërbimet</h2>
-          <p id="servicesSub"></p>
-        </div>
-        <div class="services-grid" id="servicesGrid"></div>
-      </div>
-    </section>
-
-    <!-- Portfolio -->
-    <section class="portfolio-section reveal" id="projekte">
-      <div class="container">
-        <div class="section-header">
-          <div>
-            <h2 id="portfolioTitle">Projektet e Mia</h2>
-            <p id="portfolioSub"></p>
-          </div>
-          <div class="filter-tabs">
-            <button class="tab active" data-filter="all" id="filterAll">Të Gjitha</button>
-            <button class="tab" data-filter="shtepi">Shtëpi</button>
-            <button class="tab" data-filter="biznes">Biznes</button>
-            <button class="tab" data-filter="lami">Laminat</button>
-          </div>
-        </div>
-        <div class="portfolio-grid" id="portfolioGrid"></div>
-      </div>
-    </section>
-
-    <!-- CV -->
-    <section class="cv-section reveal" id="cv">
-      <div class="container">
-        <div class="section-header center">
-          <h2 id="cvTitle">CV & Eksperienca</h2>
-          <p id="cvSub"></p>
-        </div>
-        <div class="cv-grid">
-          <div class="cv-col">
-            <h3 class="cv-col-title" id="eduTitle">Arsimimi</h3>
-            <div class="timeline" id="educationTimeline"></div>
-          </div>
-          <div class="cv-col">
-            <h3 class="cv-col-title" id="expTitle">Eksperienca</h3>
-            <div class="timeline" id="experienceTimeline"></div>
-          </div>
-        </div>
-        <div class="cv-bottom">
-          <div class="skills-block">
-            <h3 id="skillsTitle">Aftësitë</h3>
-            <div class="skills-list" id="skillsList"></div>
-          </div>
-          <div class="certs-block">
-            <h3>Certifikime</h3>
-            <ul class="certs-list" id="certsList"></ul>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Testimonials -->
-    <section class="testimonials-section reveal" id="deshmi">
-      <div class="container">
-        <div class="section-header center">
-          <h2 id="testimonialsTitle">Çfarë Thonë Klientët</h2>
-          <p id="testimonialsSub"></p>
-        </div>
-        <div class="testimonials-grid" id="testimonialsGrid"></div>
-      </div>
-    </section>
-
-    <!-- Contact -->
-    <section class="contact-section reveal" id="kontakt">
-      <div class="container contact-grid">
-        <div class="contact-info">
-          <h2 id="contactTitle">Le të Krijojmë Hapësirën Tënde</h2>
-          <p id="contactSub"></p>
-          <a href="tel:+38344123456" class="btn-call" id="contactCallBtn">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-            <span id="contactCall">Telefono Tani</span>
-          </a>
-        </div>
-        <form class="contact-form" id="contactForm">
-          <input type="text" id="contactName" placeholder="Emri" required>
-          <input type="email" id="contactEmail" placeholder="Email" required>
-          <input type="tel" id="contactPhone" placeholder="Telefoni">
-          <textarea id="contactMessage" rows="4" placeholder="Përshkruani projektin..." required></textarea>
-          <button type="submit" class="btn-primary" id="contactSend">Dërgo Mesazhin</button>
-        </form>
-      </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="footer">
-      <div class="container">
-        <div class="footer-grid">
-          <div class="footer-brand">
-            <a href="#" class="logo">
-              <span class="logo-icon">AM</span>
-              <div class="logo-text">
-                <span class="logo-name">Arber Mjekiqi</span>
-                <span class="logo-tagline" id="footerTagline">Dizajn & Laminat</span>
+      <div class="live-grid">
+        <div class="live-player-wrap">
+          <div class="live-player" id="livePlayer">
+            <div class="live-placeholder" id="livePlaceholder">
+              <img id="livePoster" src="" alt="Live">
+              <div class="live-overlay">
+                <button class="live-play-btn" id="livePlayBtn" aria-label="Shiko Live">
+                  <svg width="32" height="32" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+                </button>
+                <p id="liveOfflineText">Transmetimi fillon së shpejti</p>
               </div>
-            </a>
-            <p class="footer-desc" id="footerDesc"></p>
+            </div>
+            <iframe id="liveIframe" class="live-iframe hidden" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
           </div>
-          <div class="footer-links">
-            <h4 id="footerServices">Shërbimet</h4>
-            <a href="#sherbime">Dizajn Shtëpie</a>
-            <a href="#sherbime">Hapësira Biznesi</a>
-            <a href="#sherbime">Instalim Laminati</a>
-            <a href="#sherbime">Vizualizim 3D</a>
-          </div>
-          <div class="footer-links">
-            <h4 id="footerLinks">Linqe</h4>
-            <a href="#projekte" data-i18n="nav.portfolio">Projektet</a>
-            <a href="#cv" data-i18n="nav.cv">CV</a>
-            <a href="#kontakt" data-i18n="nav.contact">Kontakt</a>
-          </div>
-          <div class="footer-links">
-            <h4 id="footerContact">Kontakt</h4>
-            <a href="tel:+38344123456" id="footerPhone">+383 44 123 456</a>
-            <a href="mailto:arber.mjekiqi@email.com" id="footerEmail">arber.mjekiqi@email.com</a>
-            <span id="footerLocation">Prishtinë, Kosovë</span>
-          </div>
+          <p class="live-now-label" id="liveNowLabel">Tani në transmetim</p>
+          <h3 class="live-show-title" id="liveShowTitle">—</h3>
         </div>
-        <div class="footer-bottom">
-          <p id="footerRights"></p>
-          <p class="footer-motto" id="footerMotto"></p>
+
+        <aside class="live-schedule">
+          <h3 id="liveScheduleTitle">Programi i ardhshëm</h3>
+          <ul class="schedule-list" id="scheduleList"></ul>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <!-- Editor's Pick -->
+  <section class="editors-pick reveal reveal-rotate">
+    <div class="container">
+      <div class="section-header">
+        <h2><span class="accent">✦</span> <span id="editorsPickTitle">Zgjedhja e Redaksisë</span></h2>
+        <p id="editorsPickSub">Artikuj të përzgjedhur me kujdes nga Aurora Sallahu</p>
+      </div>
+      <div class="pick-grid" id="pickGrid">
+        <!-- Populated by API -->
+      </div>
+    </div>
+  </section>
+
+  <!-- Main News Grid -->
+  <section class="news-section reveal reveal-flip" id="lajme">
+    <div class="container">
+      <div class="section-header">
+        <h2 id="newsTitle">Lajmet e Ditës</h2>
+        <div class="filter-tabs">
+          <button class="tab active" data-filter="all" data-i18n="filterAll">Të Gjitha</button>
+          <button class="tab" data-filter="politike" data-i18n="nav.politics">Politikë</button>
+          <button class="tab" data-filter="ekonomi" data-i18n="nav.economy">Ekonomi</button>
+          <button class="tab" data-filter="kulture" data-i18n="nav.culture">Kulturë</button>
+          <button class="tab" data-filter="sport" data-i18n="nav.sport">Sport</button>
         </div>
       </div>
-    </footer>
 
-    <!-- Mobile nav -->
-    <nav class="mobile-bottom-nav" id="mobileBottomNav">
-      <a href="#" class="mob-nav-item active">
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9.5 12 3l9 6.5V20a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1V9.5z"/></svg>
-        <span data-i18n="nav.home">Kryefaqja</span>
-      </a>
-      <a href="#projekte" class="mob-nav-item">
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
-        <span data-i18n="nav.portfolio">Projektet</span>
-      </a>
-      <a href="#cv" class="mob-nav-item">
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
-        <span data-i18n="nav.cv">CV</span>
-      </a>
-      <a href="#kontakt" class="mob-nav-item">
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-        <span data-i18n="nav.contact">Kontakt</span>
-      </a>
-    </nav>
-  </div>
+      <div class="news-grid" id="newsGrid">
+        <!-- Populated by JS -->
+      </div>
+
+      <div class="load-more-wrap">
+        <button class="btn-outline" id="loadMore">Shfaq më shumë lajme</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Opinion Section -->
+  <section class="opinion-section reveal reveal-rotate" id="opinion">
+    <div class="container">
+      <div class="section-header light">
+        <h2 id="opinionTitle">Opinion & Kolumne</h2>
+        <p id="opinionSub">Zëra të lirë, ide të guximshme</p>
+      </div>
+      <div class="opinion-grid" id="opinionGrid">
+        <!-- Populated by API -->
+      </div>
+    </div>
+  </section>
+
+  <!-- Newsletter -->
+  <section class="newsletter reveal reveal-blur">
+    <div class="container newsletter-inner">
+      <div class="newsletter-text">
+        <h2 id="newsletterTitle">Burimi i Ditës</h2>
+        <p id="newsletterSub">Merr çdo mëngjes përmbledhjen elegante të lajmeve — kurated by AS NEWS.</p>
+      </div>
+      <form class="newsletter-form" id="newsletterForm">
+        <input type="email" id="emailInput" placeholder="Email adresa juaj" required>
+        <button type="submit" class="btn-primary" id="subscribeBtn">Abonohu</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="#" class="logo">
+            <span class="logo-icon">✦</span>
+            <div class="logo-text">
+              <span class="logo-name">AS NEWS</span>
+              <span class="logo-tagline" id="footerTagline">Gazeta e Aurora Sallahu</span>
+            </div>
+          </a>
+          <p class="footer-desc" id="footerDesc">Gazeta digjitale që sjell lajme me elegancë, thellësi dhe integritet — duke ndriçuar çdo ditë me informacion të besueshëm.</p>
+          <div class="social-links">
+            <a href="#" aria-label="Facebook">f</a>
+            <a href="#" aria-label="Instagram">ig</a>
+            <a href="#" aria-label="Twitter">𝕏</a>
+            <a href="#" aria-label="YouTube">▶</a>
+          </div>
+        </div>
+        <div class="footer-links">
+          <h4 id="footerSections">Seksionet</h4>
+          <a href="#lajme" data-i18n="nav.news">Lajme</a>
+          <a href="#lajme" data-i18n="nav.politics">Politikë</a>
+          <a href="#lajme" data-i18n="nav.economy">Ekonomi</a>
+          <a href="#lajme" data-i18n="nav.culture">Kulturë</a>
+          <a href="#lajme" data-i18n="nav.sport">Sport</a>
+        </div>
+        <div class="footer-links">
+          <h4 id="footerAbout">Rreth Nesh</h4>
+          <a href="#" id="footerHistory">Historia</a>
+          <a href="#" id="footerEditorial">Redaksia</a>
+          <a href="#" id="footerCareers">Karriera</a>
+          <a href="#" id="footerContact">Kontakt</a>
+        </div>
+        <div class="footer-links">
+          <h4 id="footerLegal">Ligjore</h4>
+          <a href="#" id="footerPrivacy">Privatësia</a>
+          <a href="#" id="footerTerms">Kushtet</a>
+          <a href="#" id="footerCookies">Cookies</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p id="footerRights">© 2026 AS NEWS — Gazeta e Aurora Sallahu. Të gjitha të drejtat e rezervuara.</p>
+        <p class="footer-motto" id="footerMotto">"Si aurora, ndriçojmë çdo agim."</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Mobile bottom navigation -->
+  <nav class="mobile-bottom-nav" id="mobileBottomNav" aria-label="Navigim mobil">
+    <a href="#" class="mob-nav-item active" data-i18n="nav.home">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9.5 12 3l9 6.5V20a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1V9.5z"/></svg>
+      <span>Kryefaqja</span>
+    </a>
+    <a href="#live" class="mob-nav-item" data-i18n="nav.live">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7z"/></svg>
+      <span>Live</span>
+    </a>
+    <a href="#lajme" class="mob-nav-item" data-i18n="nav.news">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19h16M4 15h16M4 11h16M4 7h10"/></svg>
+      <span>Lajme</span>
+    </a>
+    <a href="#opinion" class="mob-nav-item" data-i18n="nav.opinion">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9M8 16H3a1 1 0 0 1-1-1v-4a1 1 0 0 1 1-1h5m4 0V4a1 1 0 0 1 1-1h5a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1h-5a1 1 0 0 1-1-1v-3"/></svg>
+      <span>Opinion</span>
+    </a>
+  </nav>
+
+  </div><!-- .page-content -->
 
   <script src="script.js"></script>
 </body>
