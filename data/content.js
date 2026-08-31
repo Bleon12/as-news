@@ -2,7 +2,7 @@ const sq = {
   ui: {
     tickerLabel: 'Lajme të Fundit',
     logoTagline: 'Gazeta e Aurora Sallahu',
-    nav: { home: 'Kryefaqja', news: 'Lajme', politics: 'Politikë', economy: 'Ekonomi', culture: 'Kulturë', sport: 'Sport', opinion: 'Opinion', live: 'Live', cv: 'CV — Aurora Sallahu' },
+    nav: { home: 'Kryefaqja', news: 'Lajme', politics: 'Politikë', economy: 'Ekonomi', culture: 'Kulturë', sport: 'Sport', opinion: 'Opinion', live: 'Live', cv: 'CV' },
     heroLoading: 'Duke ngarkuar...',
     heroAlt: 'Lajme kryesore',
     authorPrefix: 'Nga',
@@ -63,7 +63,7 @@ const sq = {
     title: 'Themeluese & Redaktore Kryesore — AS NEWS',
     location: 'Prishtinë, Kosovë',
     email: 'aurora.sallahu@asnews.com',
-    image: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=600&q=80',
+    image: '/images/aurora-sallahu.jpg',
     summary: 'Gazetare dhe redaktore me mbi 8 vjet përvojë në media digjitale dhe televizive. Themeluese e AS NEWS — platformës që sjell lajme me integritet, stil dhe thellësi analitike për audiencën shqiptare.',
     education: [
       {
@@ -190,7 +190,7 @@ const en = {
   ui: {
     tickerLabel: 'Breaking News',
     logoTagline: 'Aurora Sallahu\'s Newspaper',
-    nav: { home: 'Home', news: 'News', politics: 'Politics', economy: 'Economy', culture: 'Culture', sport: 'Sport', opinion: 'Opinion', live: 'Live', cv: 'CV — Aurora Sallahu' },
+    nav: { home: 'Home', news: 'News', politics: 'Politics', economy: 'Economy', culture: 'Culture', sport: 'Sport', opinion: 'Opinion', live: 'Live', cv: 'CV' },
     heroLoading: 'Loading...',
     heroAlt: 'Top story',
     authorPrefix: 'By',
@@ -251,7 +251,7 @@ const en = {
     title: 'Founder & Editor-in-Chief — AS NEWS',
     location: 'Pristina, Kosovo',
     email: 'aurora.sallahu@asnews.com',
-    image: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=600&q=80',
+    image: '/images/aurora-sallahu.jpg',
     summary: 'Journalist and editor with 8+ years of experience in digital and broadcast media. Founder of AS NEWS — a platform delivering news with integrity, style and analytical depth for Albanian audiences.',
     education: [
       {

@@ -51,43 +51,52 @@
 
   <!-- Header -->
   <header class="header header-animate">
-    <div class="container header-inner">
-      <a href="#" class="logo">
-        <span class="logo-icon">✦</span>
-        <div class="logo-text">
-          <span class="logo-name">AS NEWS</span>
-          <span class="logo-tagline" id="logoTagline">Gazeta e Aurora Sallahu</span>
-        </div>
-      </a>
+    <div class="container">
+      <div class="header-shell">
+        <a href="#" class="logo">
+          <span class="logo-icon">✦</span>
+          <div class="logo-text">
+            <span class="logo-name">AS NEWS</span>
+            <span class="logo-tagline" id="logoTagline">Gazeta e Aurora Sallahu</span>
+          </div>
+        </a>
 
-      <nav class="nav" id="mainNav">
-        <a href="#" class="nav-link active" data-i18n="nav.home">Kryefaqja</a>
-        <a href="#live" class="nav-link" data-i18n="nav.live">Live</a>
-        <a href="#lajme" class="nav-link" data-i18n="nav.news">Lajme</a>
-        <a href="#lajme" class="nav-link" data-i18n="nav.politics">Politikë</a>
-        <a href="#lajme" class="nav-link" data-i18n="nav.economy">Ekonomi</a>
-        <a href="#lajme" class="nav-link" data-i18n="nav.culture">Kulturë</a>
-        <a href="#lajme" class="nav-link" data-i18n="nav.sport">Sport</a>
-        <a href="#opinion" class="nav-link" data-i18n="nav.opinion">Opinion</a>
-        <a href="#" class="nav-link nav-link-cv nav-menu-only" id="cvMenuLink" data-i18n="nav.cv">CV — Aurora Sallahu</a>
-      </nav>
+        <nav class="nav" id="mainNav" aria-label="Navigimi kryesor">
+          <div class="nav-drawer-head">
+            <span class="nav-drawer-title">Menu</span>
+            <button type="button" class="nav-close" id="navClose" aria-label="Mbyll">×</button>
+          </div>
+          <div class="nav-links">
+            <a href="#" class="nav-link active" data-i18n="nav.home">Kryefaqja</a>
+            <a href="#live" class="nav-link" data-i18n="nav.live">Live</a>
+            <a href="#lajme" class="nav-link" data-i18n="nav.news">Lajme</a>
+            <a href="#opinion" class="nav-link" data-i18n="nav.opinion">Opinion</a>
+            <a href="#" class="nav-link nav-link-cv" data-cv-open data-i18n="nav.cv">CV</a>
+          </div>
+        </nav>
 
-      <div class="header-actions">
-        <div class="lang-switch" id="langSwitch">
-          <button class="lang-btn active" data-lang="sq" aria-label="Shqip">SQ</button>
-          <button class="lang-btn" data-lang="en" aria-label="English">EN</button>
+        <div class="header-actions">
+          <button type="button" class="header-cv-btn" data-cv-open aria-label="CV Aurora Sallahu">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+            <span data-i18n="nav.cv">CV</span>
+          </button>
+          <div class="lang-switch" id="langSwitch">
+            <button class="lang-btn active" data-lang="sq" aria-label="Shqip">SQ</button>
+            <button class="lang-btn" data-lang="en" aria-label="English">EN</button>
+          </div>
+          <button class="search-btn" id="searchBtn" aria-label="Kërko">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
+            </svg>
+          </button>
+          <button class="menu-toggle" id="menuToggle" aria-label="Meny">
+            <span></span><span></span><span></span>
+          </button>
         </div>
-        <button class="search-btn" id="searchBtn" aria-label="Kërko">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
-          </svg>
-        </button>
-        <button class="menu-toggle" id="menuToggle" aria-label="Meny">
-          <span></span><span></span><span></span>
-        </button>
       </div>
     </div>
   </header>
+  <div class="nav-backdrop" id="navBackdrop" aria-hidden="true"></div>
 
   <!-- Lajmet Kryesore + Lajmet e Fundit (Gazeta Express style) -->
   <section class="top-news-section reveal reveal-blur" id="kryesore">
@@ -301,9 +310,9 @@
       <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19h16M4 15h16M4 11h16M4 7h10"/></svg>
       <span>Lajme</span>
     </a>
-    <a href="#opinion" class="mob-nav-item" data-i18n="nav.opinion">
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9M8 16H3a1 1 0 0 1-1-1v-4a1 1 0 0 1 1-1h5m4 0V4a1 1 0 0 1 1-1h5a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1h-5a1 1 0 0 1-1-1v-3"/></svg>
-      <span>Opinion</span>
+    <a href="#" class="mob-nav-item" data-cv-open data-i18n="nav.cv">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+      <span>CV</span>
     </a>
   </nav>
 

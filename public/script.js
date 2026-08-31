@@ -404,13 +404,33 @@ function closeCVModal() {
   document.body.classList.remove('cv-open');
 }
 
+function closeMobileNav() {
+  const nav = document.getElementById('mainNav');
+  const toggle = document.getElementById('menuToggle');
+  const backdrop = document.getElementById('navBackdrop');
+  nav?.classList.remove('open');
+  toggle?.classList.remove('active');
+  backdrop?.classList.remove('open');
+  document.body.classList.remove('nav-open');
+}
+
+function openMobileNav() {
+  const nav = document.getElementById('mainNav');
+  const toggle = document.getElementById('menuToggle');
+  const backdrop = document.getElementById('navBackdrop');
+  nav?.classList.add('open');
+  toggle?.classList.add('active');
+  backdrop?.classList.add('open');
+  document.body.classList.add('nav-open');
+}
+
 function initCVModal() {
-  document.getElementById('cvMenuLink')?.addEventListener('click', (e) => {
-    e.preventDefault();
-    document.getElementById('mainNav')?.classList.remove('open');
-    document.getElementById('menuToggle')?.classList.remove('active');
-    document.body.classList.remove('nav-open');
-    openCVModal();
+  document.querySelectorAll('[data-cv-open]').forEach((el) => {
+    el.addEventListener('click', (e) => {
+      e.preventDefault();
+      closeMobileNav();
+      openCVModal();
+    });
   });
 
   document.getElementById('cvModalClose')?.addEventListener('click', closeCVModal);
@@ -655,8 +675,7 @@ function initMobileBottomNav() {
   const items = nav.querySelectorAll('.mob-nav-item');
   const sectionMap = [
     { id: 'live', href: '#live' },
-    { id: 'lajme', href: '#lajme' },
-    { id: 'opinion', href: '#opinion' }
+    { id: 'lajme', href: '#lajme' }
   ];
 
   const setActive = (href) => {
@@ -674,6 +693,7 @@ function initMobileBottomNav() {
   });
 
   items.forEach((item) => {
+    if (item.hasAttribute('data-cv-open')) return;
     if (item.getAttribute('href') === '#') return;
     item.addEventListener('click', () => setActive(item.getAttribute('href')));
   });
@@ -704,20 +724,20 @@ function initMobileBottomNav() {
 function initMobileMenu() {
   const toggle = document.getElementById('menuToggle');
   const nav = document.getElementById('mainNav');
+  const backdrop = document.getElementById('navBackdrop');
+  const closeBtn = document.getElementById('navClose');
   if (!toggle || !nav) return;
 
   toggle.addEventListener('click', () => {
-    const isOpen = nav.classList.toggle('open');
-    toggle.classList.toggle('active', isOpen);
-    document.body.classList.toggle('nav-open', isOpen);
+    if (nav.classList.contains('open')) closeMobileNav();
+    else openMobileNav();
   });
 
-  nav.querySelectorAll('.nav-link:not(.nav-link-cv)').forEach((link) => {
-    link.addEventListener('click', () => {
-      nav.classList.remove('open');
-      toggle.classList.remove('active');
-      document.body.classList.remove('nav-open');
-    });
+  backdrop?.addEventListener('click', closeMobileNav);
+  closeBtn?.addEventListener('click', closeMobileNav);
+
+  nav.querySelectorAll('.nav-link:not([data-cv-open])').forEach((link) => {
+    link.addEventListener('click', closeMobileNav);
   });
 }
 
